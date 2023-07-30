@@ -1,0 +1,12 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>gotify - Tag - Evilmass</title><link>https://evilmass.github.io/tags/gotify/</link><description>gotify - Tag - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 25 Jul 2023 12:44:41 +0800</lastBuildDate><atom:link href="https://evilmass.github.io/tags/gotify/" rel="self" type="application/rss+xml"/><item><title>使用 Gotify 推送签到消息</title><link>https://evilmass.github.io/posts/%E4%BD%BF%E7%94%A8-gotify-%E6%8E%A8%E9%80%81%E7%AD%BE%E5%88%B0%E6%B6%88%E6%81%AF/</link><pubDate>Tue, 25 Jul 2023 12:44:41 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/%E4%BD%BF%E7%94%A8-gotify-%E6%8E%A8%E9%80%81%E7%AD%BE%E5%88%B0%E6%B6%88%E6%81%AF/</guid><description><![CDATA[选型 目前在 huggingface 部署了多个签到脚本，由于仓库设置成 Private，想看脚本输出就只能在浏览器请求 log/filename=&lt;filename&gt;&amp;token=&lt;token&gt; 接口。
+及时获取签到通知就成了一个新需求，要求如下：
+能自建推送服务器。 这部分隐私要求可有可无，单纯是数据在自己手上比较安心。签到日志输出内容： &lt;datetime.now&gt; &lt;sign_platform&gt; &lt;sign_result&gt;，没有任何利用价值。
+足够简单。 这个则是针对安卓端的需求，安卓推送需要 FCM（绑定谷歌三件套）必须在后台一直挂着梯子，所以 App 方案反而是能接受的。
+那可选的也就不多了，首先排除：WxPusher、Server酱、TelegramBot、QQBot、邮箱。
+那就只剩下 pushdeer、Bark、Gotify。
+pushdeer 最开始吸引我的是 pushdeer，下载 App 打开后发现 UI 做的还可以。
+But emmm，登录进去发现安卓端还没有开发好自建服务器的功能，推送信息下面还带广告，直接弃用。 Bark 针对 Apple 设备推送的效果很好，但是官方没有提供安卓端的 App，目前只有 PushLite 可用，要一直挂着梯子，且 PushLite 界面过于简陋，弃用。
+Gotify 官方文档清晰明了，无论是搭建服务端还是使用客户端接收消息都突出一个简单易用还好用。
+do one thing，and do well.
+服务端 树莓派使用可执行文件 + Nginx 做反向代理。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # &gt; curl -s https://api.]]></description></item></channel></rss>

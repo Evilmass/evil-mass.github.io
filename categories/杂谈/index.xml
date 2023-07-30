@@ -1,0 +1,30 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>杂谈 - Category - Evilmass</title><link>https://evilmass.github.io/categories/%E6%9D%82%E8%B0%88/</link><description>杂谈 - Category - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 26 Jun 2023 19:53:15 +0800</lastBuildDate><atom:link href="https://evilmass.github.io/categories/%E6%9D%82%E8%B0%88/" rel="self" type="application/rss+xml"/><item><title>因为云同步，我丢失了大学四年的照片</title><link>https://evilmass.github.io/posts/missing_photo/</link><pubDate>Mon, 26 Jun 2023 19:53:15 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/missing_photo/</guid><description>起因 本人一直对国内云盘一直没什么好态度。尤其是打开某盘，起手就默认勾选文件夹只等你一不小心按下同意按钮，直接自动扫盘（可能打开 APP 的时候就扫了）兼备份，更不说随处可见的推广和弹窗广告。
+因此在涉及到有个人隐私（家庭照片）备份方案方面都是重要隐私先加密文件夹再丢上 OneDrive 保险库，不重要但设计隐私的文件直接丢进保险库。定期用 FreeFileSync 进行双向同步，移动硬盘针对全盘备份则是半年一次。
+一切仿佛都是这么美好，甚至在发现一加云服务自动上传了我整个手机相册之后写了批量脚本全删掉了（为什么要手贱）。
+出事 OneDrive 保险库一直都挺好用的，直到文件过多（什么文件我不说）后，Windows 端的云备份频繁卡死。不管是重置程序还是转移文件出保险库，只要保险库内文件数量到一定程度，OneDrive 扫盘建索引传文件这一套下来，不是卡在正在上传就是打开本地文件夹后云备份程序直接崩溃。
+按理说转移出来创建两个文件夹分别加密就好了，但是懒（手贱还懒），转移出来我关掉保险库功能，结果增量同步后出现重复文件的问题。
+云同步 != 云备份 可以留意到上一节我用的都是云备份，真正的云同步是某盘和一加自带的云服务这种，因此为了解决双向同步问题引入了 FreeFileSync。
+整个双向云同步的逻辑就变成这样：
+手机新增图片 手机开启 FTP 服务器 FreeFileSync 增量同步手机多个相册到 OneDrive 指定目录 Windows 本地 OneDrive 自动同步 手机端的 OneDrive 也自动同步 看上去都没什么问题，但是手机端的 OneDrive 会作妖。它会像下面这样提示你是否备份新出现的文件夹，然而实际上我已经把所有需要同步的相册目录添加进去了。 但是！手机新增的图片不仅会添加到你设定的文件夹去，还会被多一份拷贝添加到它固定（删了会自动创建）目录下：本机照片。
+这就导致我每次同步都得从本机照片里找到需要或不需要的照片，根据不同目录（微信、淘宝、Bilibili、QQ、系统截图）手动筛一遍。
+那手机 OneDrive 本地监听的备份目录意义何在？
+而且一旦手机端 OneDrive 先同步再走双向云同步流程的话，FreeFileSync 就分不清你想要的还是你想要删掉的，毕竟哪边修改日期更新就增量同步过去。
+于是乎在
+一加云相册被脚本删完 FreeFileSync 双向同步删掉 2020 年 2 月前所有照片 移动硬盘备份也是最新的（丢失输出的新增备份） 的叠加状态下，我成功丢失了大学四年所有照片，以及数十张更旧照片的所有回忆。
+反思 现在去掉了整个双向同步流程，OneDrive 作为云备份，一加云服务则是云同步，移动硬盘备份前再三确认相册有无过多删减。
+其实大学四年能回忆起来的东西并不多，大四拍毕业照当天我也和宿友感慨过：
+大学四年，匆匆走过，形同路人。 谈不上多遗憾只是觉得时间走得太快，徒留少数自我感动的时刻和即将远走各方的失落。 大一到大四每个学期印象比较深的事件大概很久都不会忘记，但是以后就说不准了。更旧的照片也没有什么隐私，美食方面占了很大一部分，所以丢了也不遗憾。
+我以前也不喜欢将个人隐私暴露到网络上，高中还把小学时期 QQ 空间的内容全删了。现在看来大可不必，相片存在的意义就是记录当下，对于个人而言就是定格时光和回忆的载体，不管多么幼稚可笑，都是难得的回忆。
+隐私保护是必要的，记录当下更是。</description></item><item><title>写作意义</title><link>https://evilmass.github.io/posts/%E5%86%99%E4%BD%9C%E6%84%8F%E4%B9%89/</link><pubDate>Tue, 23 Aug 2022 19:07:42 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/%E5%86%99%E4%BD%9C%E6%84%8F%E4%B9%89/</guid><description>人生意义也不过是去码头整点薯条。
+别人说的 别人的文章写得很好，把你想说的全说了。
+总是深思熟虑，文章也看似完美。
+知识体系还是别人的，甚至模糊记忆的感受也是别人的。
+时间一长什么都记不住。
+我想说的 情感表达热烈，思路流程简洁。
+团结紧张，严肃活泼。
+博客有一个 当下迷思 的标签，仅有一篇文章，内容随时间段落更新一句话、一张图、一段思考过程。
+可能很克制，可能很幼稚，可能很愤怒，可能很无厘头
+也可能充满希望。
+为了在某一天回想起来那些重要的，不重要的刹那，翻起万千思绪。</description></item><item><title>当你的朋友需要科学上网的时候</title><link>https://evilmass.github.io/posts/trollinggfw/</link><pubDate>Fri, 21 Jan 2022 00:00:00 +0000</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/trollinggfw/</guid><description>自建还是机场 遥想大一暑假，一个零基础小白捣鼓 Shadowsocks 花了整整三天：
+找免费 VPN 注册搬瓦工 搜索 Linux 的各种命令行用法 配置编译环境一大堆报错 从 Ubuntu12.04 到 CentOS7 再到 CentOS6 重复 2-3 直到跑起 ss-server Chrome 搭配 SwitchyOmega 打开谷歌的一瞬间有莫大的成就感 在油管看完 Maroon5 - Payphone 的 MV 后开始思考翻墙有什么用 也曾陷入过追求工具的狂热
+| 可用性 | 速度 | 开销 | | 付费 | 薅羊毛 | VPS | | SS | SSR | V2ray | Trojan | Xray | | CN2 | IPLC | IEPL | Anycast |中转-落地 | 每一项指标都在与 GFW 斗智斗勇，耗费大量时间精力就为了延迟和测速跑分能更好看一些。</description></item></channel></rss>

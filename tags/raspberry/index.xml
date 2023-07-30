@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Raspberry - Tag - Evilmass</title><link>https://evilmass.github.io/tags/raspberry/</link><description>Raspberry - Tag - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 11 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://evilmass.github.io/tags/raspberry/" rel="self" type="application/rss+xml"/><item><title>WARP 作为科学上网备用手段</title><link>https://evilmass.github.io/posts/warp/</link><pubDate>Thu, 11 Aug 2022 00:00:00 +0000</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/warp/</guid><description>梯子爆炸 前几天经历过一次两个机场同时失效的情况，期间拿 Cloudflare WARP 客户端暂时顶过去。
+梯子这东西日常使用感受不到好处，一旦所有梯子同时失效只能用灾难来形容。
+虽然 Cloudflare 早几年被玩坏了，但是作为一个备用手段绰绰有余。
+APP 端 ZeroTrust 验证失败的绕过方法 在 Issue 区看到 AndroidStudio 抓包获取 Teams ID 的方法，尝试了一遍发现没什么必要：手动配置更快。
+但手机端在验证的最后一步提示失败，挂梯子也无法解决。 在 Windows 留意到有一个 DOH 网关的字样。虽然 warp-cli set-gateway 是制定官方服务器作 DNS 查询，填到手机上却自动激活了 ZeroTrust。 WRAP 配置 ZeroTrust 的教程一搜就有：滥用 Cloudflare ZeroTrust WARP 科学上网。
+安装好 Cloudflare Windows Desktop Client 后开启本地代理，往 Clash 添加一个 Socks5 服务器即可。
+Clash 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 mixed-port: 7890 # Linux 和 macOS 的 redir 代理端口 redir-port: 7892 # 允许局域网的连接 allow-lan: true # 规则模式：Rule（规则） / Global（全局代理）/ Direct（全局直连） mode: rule # 设置日志输出级别 (默认级别：silent，即不输出任何内容，以避免因日志内容过大而导致程序内存溢出）。 # 5 个级别：silent / info / warning / error / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。 log-level: info # Clash 的 RESTful API external-controller: &amp;#39;0.</description></item><item><title>我在树莓派上跑了多少服务</title><link>https://evilmass.github.io/posts/raspbot/</link><pubDate>Sat, 29 Jan 2022 17:04:42 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/raspbot/</guid><description>你真的需要云服务器吗 大二买的 Raspberry Pi 3B+ 至今服役在家里的路由器旁，虽然我从未拿它做什么正儿八经的研究和生产，但是想要折腾新东西的时候总是先在上面跑。
+想起前几年买的国内云学生机，食之无味弃之不可惜。一方面写写博客纯静态页面挂载在 GitHub 上足够，另一方面很多用得到的服务也不需要这么多性能。
+fail2Ban 仓库地址：fail2Ban
+如果用的是 Python3，需要先执行一遍 ./fail2ban-2to3。不然会报如下错误：
+1 ERROR: No module named &amp;#39;ConfigParser&amp;#39; aliddns 仓库地址：aliddns
+广州电信给了公网 IPV4 地址，路由器也开启了相应 ddns 以及端口映射。树莓派的 ddns 主要是解析 IPV6 地址，多点保险手段总是好的。
+UnblockNeteaseMusic 仓库地址：UnblockNeteaseMusic
+Clash 仓库地址：Clash
+自用机场和 WARP(wireproxy) 两套配置，后者反而还稳定些（低频率请求）。
+go-cqhttp 仓库地址：go-cqhttp
+配合 nonebot 插件跑 qq 机器人，平时搜搜图还是很好用的。
+v2ray 仓库地址：V2ray
+前两年折腾联通 host 免流：直接花三块钱买网上提供的云免流服务，直接把各种 host 保存下来。一不需要手机安装 PackageCapture 抓包，二不怕短期失效。
+pull.free.video.10010.com shoutingtoutiao1.10010.com 现在公司和家里的 WiFi 覆盖时间已经完全不需要折腾了。工作之后对时间开销看得更重：能花钱解决的中长期（持续需求）问题一律花钱解决。
+当然，国内网盘这种东西不值得我付费。
+OneDrive 之前也尝试过用全量备份脚本然后隔段时间就保存到电脑，但是压缩镜像耗时问题以及反复解压很容易忘记备份了什么。
+现在干脆直接将本地目录（常用软件、各类配置文件）整个上传到 OneDrive，crontab 下加一行实现定时增量备份。
+1 /home/pi/bin/rclone sync /home/pi/ rasp:/Raspberry --transfers 16 -P --onedrive-chunk-size 40M 用到的 Rclone 配置看这篇：Linux使用Rclone挂载OneDrive网盘</description></item></channel></rss>

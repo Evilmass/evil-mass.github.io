@@ -1,0 +1,11 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>multitreading - Tag - Evilmass</title><link>https://evilmass.github.io/tags/multitreading/</link><description>multitreading - Tag - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 11 Feb 2021 01:17:31 +0800</lastBuildDate><atom:link href="https://evilmass.github.io/tags/multitreading/" rel="self" type="application/rss+xml"/><item><title>Python 多线程笔记</title><link>https://evilmass.github.io/posts/multithreading/</link><pubDate>Thu, 11 Feb 2021 01:17:31 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/multithreading/</guid><description><![CDATA[中国有句古话：好记性不如烂笔头。看会了和学会了是两码事，能教会别人说明是真掌握了。
+比起一堆 job1 | job2 和 生产者-消费者 模型，单纯复制粘贴相似度 99% 的代码就算自己敲一遍也不会有印象。
+反向思考 请写出一个死锁的案例 加锁即为互斥，防止多线程同时修改同一个资源导致数据错误。
+A 拿酱油 -&gt; 酱油炒饭耗时10分钟 -&gt; 拿盐 # 等待B放回盐 -&gt; 盐水菜心耗时5分钟 -&gt; 放回盐 -&gt; 放回酱油 B 拿盐 -&gt; 盐水菜心耗时5分钟 -&gt; 拿酱油 # 等待A放回酱油 -&gt; 酱油炒饭耗时10分钟 -&gt; 放回酱油 -&gt; 放回盐 你在等酱油我在盐，两人的下一道菜就永远卡这了。
+当然这种写法肯定是有问题的，资源执行和释放的顺序不一致。
+解决方法 让步：
+只要每个线程执行完任务立马释放相应资源，线程崩溃的话设置好超时释放。 排队：
+同时竞争资源，用队列（推荐）解决。 规则：
+占用资源前给予规则限制。 例子：5人吃饭同时拿起左边筷子并等待右边筷子的释放。 解决：给筷子编号，没拿到小号筷子前不能拿大号的。最大数字的筷子不可能单独拿到，问题解决。 如果用多进程处理多线程代码，会发生什么 问的其实是二者在使用方面的区别，首先自然是确定多线程代码执行的任务是什么。
+如果要处理 `IO密集型`任务，用多进程反而会慢，主要耗时在创建和维护进程过程。 如果处理 `CPU密集型`任务，则可以充分利用多核优势并行计算。 多进程的主要问题：
+进程不共享内存，计算的输入必须被传到每个工作进程里，比如列表中的元素； 能被传递的东西必须 picklable，而有相当多的东西是 unpicklable 的； 如果后续程序执行需要并行计算的输出，那么这些输出也得 picklable； Pickle -&gt; unpickle 操作带来了额外的性能开销。 多线程涉及资源竞争&amp;修改、死锁、上下文切换导致效率下降问题。]]></description></item></channel></rss>

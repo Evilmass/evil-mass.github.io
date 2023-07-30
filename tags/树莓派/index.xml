@@ -1,0 +1,27 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>树莓派 - Tag - Evilmass</title><link>https://evilmass.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link><description>树莓派 - Tag - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 28 Jul 2023 01:30:54 +0800</lastBuildDate><atom:link href="https://evilmass.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="self" type="application/rss+xml"/><item><title>树莓派 clash 遭遇大量不明 http connections</title><link>https://evilmass.github.io/posts/%E6%A0%91%E8%8E%93%E6%B4%BE-clash-%E9%81%AD%E9%81%87%E5%A4%A7%E9%87%8F%E4%B8%8D%E6%98%8E-http-connections/</link><pubDate>Fri, 28 Jul 2023 01:30:54 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/%E6%A0%91%E8%8E%93%E6%B4%BE-clash-%E9%81%AD%E9%81%87%E5%A4%A7%E9%87%8F%E4%B8%8D%E6%98%8E-http-connections/</guid><description><![CDATA[今晚登录树莓派发现输入延迟很高，htop 打开一看 clash 占用的内存快拉满了，netstat -anp 发现有很多不明连接。
+搜到相关 Issue：请考虑关闭 Allow-Lan，还是那句：任何需要部署到公网的东西都要注意权限（身份验证+端口限制）最小化。
+1 2 3 4 5 allow-lan: true authentication: - &#34;&lt;user&gt;:&lt;pass&gt;&#34; external-controller: &#39;127.0.0.1:9090&#39; secret: &#39;&lt;secret&gt;&#39; 还好在树莓派上跑的是备用代理 CloudFlare WARP，要是机场梯子的话 200G 流量一下午就能刷完。
+添加相应配置之后就没有不明 IP 连进来了。]]></description></item><item><title>在树莓派部署青龙签到平台</title><link>https://evilmass.github.io/posts/checkin/</link><pubDate>Mon, 17 Jul 2023 19:42:12 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/checkin/</guid><description>框架选择 QD 基于 HAR 的定时任务平台，上手简单。但是对于开发自由度来说不够高，也不好处理动态加载的页面。
+青龙面板 相对友好的定时任务平台，自带依赖管理（Nodejs、Python、Linux），脚本类则支持 Python3、JavaScript、Shell、Typescript。
+部署 1 2 3 4 5 6 7 8 # curl -sSL get.docker.com | sh docker run -dit \ -v $PWD/ql/data:/ql/data \ -p 5700:5700 \ --name qinglong \ --hostname qinglong \ --restart unless-stopped \ whyour/qinglong:debain 坑点：
+whyour/qinglong:latest 默认使用 alpine 精简镜像导致很多 python 依赖无法安装 因此选择 whyour/qinglong:debain 镜像。 签到脚本 本来是想用 requests 一把梭的，但是吾爱破解的签到页面用了动态加载 js ，直接访问接口会提示：请开启JavaScript并刷新该页。
+想了解三者区别可以看这个：Playwright VS Selenium VS Puppeteer VS Cypress。
+当时想着尝试新东西选了 playwright，体验很好，不再需要折腾各种新旧版本的 webdriver。
+然后如无意外的出意外了。</description></item><item><title>我在树莓派上跑了多少服务</title><link>https://evilmass.github.io/posts/raspbot/</link><pubDate>Sat, 29 Jan 2022 17:04:42 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/raspbot/</guid><description>你真的需要云服务器吗 大二买的 Raspberry Pi 3B+ 至今服役在家里的路由器旁，虽然我从未拿它做什么正儿八经的研究和生产，但是想要折腾新东西的时候总是先在上面跑。
+想起前几年买的国内云学生机，食之无味弃之不可惜。一方面写写博客纯静态页面挂载在 GitHub 上足够，另一方面很多用得到的服务也不需要这么多性能。
+fail2Ban 仓库地址：fail2Ban
+如果用的是 Python3，需要先执行一遍 ./fail2ban-2to3。不然会报如下错误：
+1 ERROR: No module named &amp;#39;ConfigParser&amp;#39; aliddns 仓库地址：aliddns
+广州电信给了公网 IPV4 地址，路由器也开启了相应 ddns 以及端口映射。树莓派的 ddns 主要是解析 IPV6 地址，多点保险手段总是好的。
+UnblockNeteaseMusic 仓库地址：UnblockNeteaseMusic
+Clash 仓库地址：Clash
+自用机场和 WARP(wireproxy) 两套配置，后者反而还稳定些（低频率请求）。
+go-cqhttp 仓库地址：go-cqhttp
+配合 nonebot 插件跑 qq 机器人，平时搜搜图还是很好用的。
+v2ray 仓库地址：V2ray
+前两年折腾联通 host 免流：直接花三块钱买网上提供的云免流服务，直接把各种 host 保存下来。一不需要手机安装 PackageCapture 抓包，二不怕短期失效。
+pull.free.video.10010.com shoutingtoutiao1.10010.com 现在公司和家里的 WiFi 覆盖时间已经完全不需要折腾了。工作之后对时间开销看得更重：能花钱解决的中长期（持续需求）问题一律花钱解决。
+当然，国内网盘这种东西不值得我付费。
+OneDrive 之前也尝试过用全量备份脚本然后隔段时间就保存到电脑，但是压缩镜像耗时问题以及反复解压很容易忘记备份了什么。
+现在干脆直接将本地目录（常用软件、各类配置文件）整个上传到 OneDrive，crontab 下加一行实现定时增量备份。
+1 /home/pi/bin/rclone sync /home/pi/ rasp:/Raspberry --transfers 16 -P --onedrive-chunk-size 40M 用到的 Rclone 配置看这篇：Linux使用Rclone挂载OneDrive网盘</description></item></channel></rss>

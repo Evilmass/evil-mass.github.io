@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Termux - Tag - Evilmass</title><link>https://evilmass.github.io/tags/termux/</link><description>Termux - Tag - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 18 Mar 2023 13:13:33 +0800</lastBuildDate><atom:link href="https://evilmass.github.io/tags/termux/" rel="self" type="application/rss+xml"/><item><title>使用安卓设备运行 vits 语音合成</title><link>https://evilmass.github.io/posts/android_vits/</link><pubDate>Sat, 18 Mar 2023 13:13:33 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/android_vits/</guid><description>配置不难就是坑多，而且完全不可用。
+PRoot 与 chroot chroot 和 PRoot的一个主要区别是 chroot 是原生的。
+PRoot通过使用 ptrace() 劫持系统调用参数和返回值来伪造文件系统布局和用户/组ID。 chroot不造成额外的开销，在任何设备上都不会出现问题，但是它需要root权限。 所以基于PRoot的 UserLAnd 和 Termux 并不适合。 一开始用 UserLAnd 配置环境倒是没问题，但是执行到 pip install package 的时候就报 Permission Denied 错误。
+root 闲置机器是 Nubia Z9，安卓 5.2 版本直接线刷回出厂版本后使用 Kingroot 一键 root。
+不得不说这块屏幕和金属边框设计放到 2023 年还是很漂亮，最近新出的 Z50 Ultra 也是类似设计。 可惜的是 骁龙810 + 电池 2900毫安 + 3G 运行内存。810 在日常室温使用只能用烫手来形容，加上扎实的手感，拿起来怕摔加保护壳又没手感+升温，当日常备用机完全不合适。
+LinuxDeploy 仓库地址：LinuxDeploy
+基本按图里面的配置或者全程科学上网都没有什么问题，BusyBox 实测是不需要的。
+架构选 ARM64 即可，系统一定要选 LTS Release，非 LTS 不支持 deadsnakes 源，apt get install python3.7 肯定比源码编译快多了。当然，想尝试花一个小时从源码编译 Python3.7 我也不拦着（</description></item></channel></rss>

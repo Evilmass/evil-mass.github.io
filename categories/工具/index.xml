@@ -1,0 +1,25 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>工具 - Category - Evilmass</title><link>https://evilmass.github.io/categories/%E5%B7%A5%E5%85%B7/</link><description>工具 - Category - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 25 Jul 2023 12:44:41 +0800</lastBuildDate><atom:link href="https://evilmass.github.io/categories/%E5%B7%A5%E5%85%B7/" rel="self" type="application/rss+xml"/><item><title>使用 Gotify 推送签到消息</title><link>https://evilmass.github.io/posts/%E4%BD%BF%E7%94%A8-gotify-%E6%8E%A8%E9%80%81%E7%AD%BE%E5%88%B0%E6%B6%88%E6%81%AF/</link><pubDate>Tue, 25 Jul 2023 12:44:41 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/%E4%BD%BF%E7%94%A8-gotify-%E6%8E%A8%E9%80%81%E7%AD%BE%E5%88%B0%E6%B6%88%E6%81%AF/</guid><description><![CDATA[选型 目前在 huggingface 部署了多个签到脚本，由于仓库设置成 Private，想看脚本输出就只能在浏览器请求 log/filename=&lt;filename&gt;&amp;token=&lt;token&gt; 接口。
+及时获取签到通知就成了一个新需求，要求如下：
+能自建推送服务器。 这部分隐私要求可有可无，单纯是数据在自己手上比较安心。签到日志输出内容： &lt;datetime.now&gt; &lt;sign_platform&gt; &lt;sign_result&gt;，没有任何利用价值。
+足够简单。 这个则是针对安卓端的需求，安卓推送需要 FCM（绑定谷歌三件套）必须在后台一直挂着梯子，所以 App 方案反而是能接受的。
+那可选的也就不多了，首先排除：WxPusher、Server酱、TelegramBot、QQBot、邮箱。
+那就只剩下 pushdeer、Bark、Gotify。
+pushdeer 最开始吸引我的是 pushdeer，下载 App 打开后发现 UI 做的还可以。
+But emmm，登录进去发现安卓端还没有开发好自建服务器的功能，推送信息下面还带广告，直接弃用。 Bark 针对 Apple 设备推送的效果很好，但是官方没有提供安卓端的 App，目前只有 PushLite 可用，要一直挂着梯子，且 PushLite 界面过于简陋，弃用。
+Gotify 官方文档清晰明了，无论是搭建服务端还是使用客户端接收消息都突出一个简单易用还好用。
+do one thing，and do well.
+服务端 树莓派使用可执行文件 + Nginx 做反向代理。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # &gt; curl -s https://api.]]></description></item><item><title>笔记软件迁移</title><link>https://evilmass.github.io/posts/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E8%BF%81%E7%A7%BB/</link><pubDate>Sat, 22 Jul 2023 02:08:12 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E8%BF%81%E7%A7%BB/</guid><description><![CDATA[理由 OneNote OneNote 的笔记是真正意义上的笔记，分页层级清晰，网页端的根据所选部分裁剪和全文裁剪功能更是一流。但是：
+不支持 Markdown，而且微软官方也停止功能更新了。 一旦裁剪的内容多了不定时分类就会很乱，没有进知识体系（自身问题）。 vscode 用 vscode 写博客文章也不顺手：
+实时渲染（Live Preview）不理想。段落一长就要往右拖滚动栏。 每次打开 Markdown 文件要么自动打开另一侧的 Preview（简单修改文件又得手动关），要么每次都手动打开。 OneNote 双向同步略麻烦。 插件多了之后启动速度变慢。 所以尝试一下 Obsidian，看看能不能将平时的 信息收集 + 写作流 迁移过来。
+基础设置 语言 About -&gt; Language -&gt; 简体中文
+字体 雾霭文楷 这字体是真好看。 主题 Things 自用快捷键 默认的小窗预览文件好评，常用且实用。 CMD + 鼠标悬停链接 -&gt; 预览文件 Ctrl + E -&gt; 切换 编辑/预览 模式 Ctrl + O -&gt; 打开最近文件 Ctrl + Shift + F -&gt; 在所有文件内搜索内容 Ctrl + N -&gt; 新建文件 Ctrl + R -&gt; 文本内替换 Ctrl + T -&gt; 类似浏览器的新建页面 Ctrl + [1-9] -&gt; 切换标签页 Ctrl + Alt + = -&gt; 左右分屏 Ctrl + G -&gt; 关系图【不常用】]]></description></item><item><title>在树莓派部署青龙签到平台</title><link>https://evilmass.github.io/posts/checkin/</link><pubDate>Mon, 17 Jul 2023 19:42:12 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/checkin/</guid><description>框架选择 QD 基于 HAR 的定时任务平台，上手简单。但是对于开发自由度来说不够高，也不好处理动态加载的页面。
+青龙面板 相对友好的定时任务平台，自带依赖管理（Nodejs、Python、Linux），脚本类则支持 Python3、JavaScript、Shell、Typescript。
+部署 1 2 3 4 5 6 7 8 # curl -sSL get.docker.com | sh docker run -dit \ -v $PWD/ql/data:/ql/data \ -p 5700:5700 \ --name qinglong \ --hostname qinglong \ --restart unless-stopped \ whyour/qinglong:debain 坑点：
+whyour/qinglong:latest 默认使用 alpine 精简镜像导致很多 python 依赖无法安装 因此选择 whyour/qinglong:debain 镜像。 签到脚本 本来是想用 requests 一把梭的，但是吾爱破解的签到页面用了动态加载 js ，直接访问接口会提示：请开启JavaScript并刷新该页。
+想了解三者区别可以看这个：Playwright VS Selenium VS Puppeteer VS Cypress。
+当时想着尝试新东西选了 playwright，体验很好，不再需要折腾各种新旧版本的 webdriver。
+然后如无意外的出意外了。</description></item><item><title>从 PicGo 迁移到 PicList</title><link>https://evilmass.github.io/posts/%E4%BB%8E-picgo-%E8%BF%81%E7%A7%BB%E5%88%B0-piclist/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/%E4%BB%8E-picgo-%E8%BF%81%E7%A7%BB%E5%88%B0-piclist/</guid><description>理由 作为一个图片上传工具，其实没有这么多要求。但是 PicList 恰好有两给痛点无法解决：
+无法同步删掉图床的图片 上传图片只能拖拽图片到主窗口 图片一多容易冗余。 窗口一多（vscode 代码窗口、osbidian 写作窗口、Chrome 网页、PicGo 主窗口、图片文件夹窗口），切换图片文件夹到上传窗口略麻烦。
+而 PicList 正好解决以上痛点。 从 PicGo 一键迁移 Mini 窗口快速上传 只要往窗口拖拽图片即可，常用且实用的功能。 添加水印和去除敏感信息 水印看情况加，但公开访问的图片不建议带任何个人隐私，所以消除图片里面的 EXIF 数据很有必要。 同步配置到 Github 私人仓库 关闭声音通知 有个窗口提示即可，不然批量上传后会一直有声音提示。 功能稳定之后一般就不再升级版本了，除非有 Bug。
+我在 1.9.7 版本提了一个功能需求也马上加上了，整挺好。</description></item></channel></rss>

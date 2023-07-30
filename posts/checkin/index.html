@@ -1,0 +1,221 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>在树莓派部署青龙签到平台 - Evilmass</title><meta name=description content="About EnjoyIt Theme"><meta property="og:title" content="在树莓派部署青龙签到平台"><meta property="og:description" content="框架选择 QD 基于 HAR 的定时任务平台，上手简单。但是对于开发自由度来说不够高，也不好处理动态加载的页面。
+青龙面板 相对友好的定时任务平台，自带依赖管理（Nodejs、Python、Linux），脚本类则支持 Python3、JavaScript、Shell、Typescript。
+部署 1 2 3 4 5 6 7 8 # curl -sSL get.docker.com | sh docker run -dit \ -v $PWD/ql/data:/ql/data \ -p 5700:5700 \ --name qinglong \ --hostname qinglong \ --restart unless-stopped \ whyour/qinglong:debain 坑点：
+whyour/qinglong:latest 默认使用 alpine 精简镜像导致很多 python 依赖无法安装 因此选择 whyour/qinglong:debain 镜像。 签到脚本 本来是想用 requests 一把梭的，但是吾爱破解的签到页面用了动态加载 js ，直接访问接口会提示：请开启JavaScript并刷新该页。
+想了解三者区别可以看这个：Playwright VS Selenium VS Puppeteer VS Cypress。
+当时想着尝试新东西选了 playwright，体验很好，不再需要折腾各种新旧版本的 webdriver。
+然后如无意外的出意外了。"><meta property="og:type" content="article"><meta property="og:url" content="https://evilmass.github.io/posts/checkin/"><meta property="og:image" content="https://evilmass.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-17T19:42:12+08:00"><meta property="article:modified_time" content="2023-07-30T16:55:57+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://evilmass.github.io/logo.png"><meta name=twitter:title content="在树莓派部署青龙签到平台"><meta name=twitter:description content="框架选择 QD 基于 HAR 的定时任务平台，上手简单。但是对于开发自由度来说不够高，也不好处理动态加载的页面。
+青龙面板 相对友好的定时任务平台，自带依赖管理（Nodejs、Python、Linux），脚本类则支持 Python3、JavaScript、Shell、Typescript。
+部署 1 2 3 4 5 6 7 8 # curl -sSL get.docker.com | sh docker run -dit \ -v $PWD/ql/data:/ql/data \ -p 5700:5700 \ --name qinglong \ --hostname qinglong \ --restart unless-stopped \ whyour/qinglong:debain 坑点：
+whyour/qinglong:latest 默认使用 alpine 精简镜像导致很多 python 依赖无法安装 因此选择 whyour/qinglong:debain 镜像。 签到脚本 本来是想用 requests 一把梭的，但是吾爱破解的签到页面用了动态加载 js ，直接访问接口会提示：请开启JavaScript并刷新该页。
+想了解三者区别可以看这个：Playwright VS Selenium VS Puppeteer VS Cypress。
+当时想着尝试新东西选了 playwright，体验很好，不再需要折腾各种新旧版本的 webdriver。
+然后如无意外的出意外了。"><meta name=application-name content="Evilmass"><meta name=apple-mobile-web-app-title content="Evilmass"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://evilmass.github.io/posts/checkin/><link rel=prev href=https://evilmass.github.io/posts/oneindex/><link rel=next href=https://evilmass.github.io/posts/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E8%BF%81%E7%A7%BB/><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css><link rel=stylesheet href=/css/style.min.a409af070546af1c10d0fd62cfe22c39a6b7144f59f987322a36a9b61b80360b.css integrity="sha256-pAmvBwVGrxwQ0P1iz+IsOaa3FE9Z+YcyKjapthuANgs="><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"在树莓派部署青龙签到平台","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/evilmass.github.io\/posts\/checkin\/"},"image":["https:\/\/evilmass.github.io\/images\/Apple-Devices-Preview.png"],"genre":"posts","keywords":"青龙面板, 树莓派, playwright","wordcount":461,"url":"https:\/\/evilmass.github.io\/posts\/checkin\/","datePublished":"2023-07-17T19:42:12+08:00","dateModified":"2023-07-30T16:55:57+08:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"xxxx","logo":"https:\/\/evilmass.github.io\/images\/avatar.png"},"author":{"@type":"Person","name":"Evilmass"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=Evilmass><span class=header-title-pre><i class='fas fa-heart fa-fw'></i></span>Evilmass</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=Evilmass><span class=header-title-pre><i class='fas fa-heart fa-fw'></i></span>Evilmass</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">在树莓派部署青龙签到平台</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>Evilmass</a></span>&nbsp;<span class=post-category>included in <a href=/categories/%E5%B7%A5%E5%85%B7/><i class="far fa-folder fa-fw"></i>工具</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-07-17>2023-07-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;461 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;<span><i class="far fa-eye fa-fw"></i>&nbsp;<span id=twikoo_visiotors>-1</span>&nbsp;views
+</span>&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#框架选择>框架选择</a></li><li><a href=#部署>部署</a></li><li><a href=#签到脚本>签到脚本</a></li><li><a href=#playwright>playwright</a><ul><li><a href=#webdriver-检测>webdriver 检测</a></li><li><a href=#alpine-精简镜像的问题>alpine 精简镜像的问题</a></li></ul></li><li><a href=#whyourqinglongdebian>whyour/qinglong:debian</a></li><li><a href=#不推荐playwright-websocket-server>[不推荐]playwright Websocket Server</a></li></ul></nav></div></div><div class=content id=content><h2 id=框架选择>框架选择</h2><p><a href=https://github.com/qd-today/qd target=_blank rel="noopener noreferrer">QD</a>
+基于 <a href="https://toolbox.googleapps.com/apps/har_analyzer/?lang=zh_CN" target=_blank rel="noopener noreferrer">HAR</a> 的定时任务平台，上手简单。但是对于开发自由度来说不够高，也不好处理动态加载的页面。</p><p><a href=https://github.com/whyour/qinglong target=_blank rel="noopener noreferrer">青龙面板</a>
+相对友好的定时任务平台，自带依赖管理（Nodejs、Python、Linux），脚本类则支持 Python3、JavaScript、Shell、Typescript。</p><h2 id=部署>部署</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># curl -sSL get.docker.com | sh</span>
+</span></span><span class=line><span class=cl>docker run -dit <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v <span class=nv>$PWD</span>/ql/data:/ql/data <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -p 5700:5700 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --name qinglong <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --hostname qinglong <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --restart unless-stopped <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  whyour/qinglong:debain
+</span></span></code></pre></td></tr></table></div></div><p>坑点：</p><pre><code>whyour/qinglong:latest 默认使用 alpine 精简镜像导致很多 python 依赖无法安装
+因此选择 whyour/qinglong:debain 镜像。
+</code></pre><h2 id=签到脚本>签到脚本</h2><p>本来是想用 <a href=https://requests.readthedocs.io/en/latest/ target=_blank rel="noopener noreferrer">requests</a> 一把梭的，但是吾爱破解的签到页面用了动态加载 js ，直接访问接口会提示：<strong>请开启JavaScript并刷新该页</strong>。</p><p>想了解三者区别可以看这个：<a href=https://www.cnblogs.com/fnng/p/14230840.html target=_blank rel="noopener noreferrer">Playwright VS Selenium VS Puppeteer VS Cypress</a>。</p><p>当时想着尝试新东西选了 playwright，体验很好，不再需要折腾各种新旧版本的 webdriver。</p><p><strong>然后如无意外的出意外了。</strong></p><h2 id=playwright>playwright</h2><p>如果快速上手可以看这一篇：[[Task/Playwright 五分钟上手指南/playwright 五分钟上手指南]]
+官方文档很详细，API 设计很好（语法符合操作直觉），下面是通用的签到流程代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># coding:utf-8</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>os.path</span> <span class=kn>import</span> <span class=n>abspath</span><span class=p>,</span> <span class=n>dirname</span><span class=p>,</span> <span class=n>join</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>loguru</span> <span class=kn>import</span> <span class=n>logger</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>playwright.async_api</span> <span class=kn>import</span> <span class=n>async_playwright</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>playwright_stealth</span> <span class=kn>import</span> <span class=n>stealth_async</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DIR_PATH</span> <span class=o>=</span> <span class=n>dirname</span><span class=p>(</span><span class=n>abspath</span><span class=p>(</span><span class=vm>__file__</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>PROXY</span> <span class=o>=</span> <span class=s2>&#34;http://localhost:7890&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># log</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>join</span><span class=p>(</span><span class=n>DIR_PATH</span><span class=p>,</span> <span class=s1>&#39;log/v2ex.log&#39;</span><span class=p>)</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=nb>format</span><span class=o>=</span><span class=s2>&#34;</span><span class=si>{time}</span><span class=s2> </span><span class=si>{level}</span><span class=s2> </span><span class=si>{message}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># conf</span>
+</span></span><span class=line><span class=cl><span class=n>title</span> <span class=o>=</span> <span class=s2>&#34;V2EX&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>cookie_file</span> <span class=o>=</span> <span class=n>join</span><span class=p>(</span><span class=n>DIR_PATH</span><span class=p>,</span> <span class=s2>&#34;cookie/v2ex.json&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>url</span> <span class=o>=</span> <span class=s2>&#34;https://v2ex.com&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>sign_url</span> <span class=o>=</span> <span class=s2>&#34;https://v2ex.com/mission/daily&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># gotify</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>push_msg</span><span class=p>(</span><span class=n>title</span><span class=p>,</span> <span class=n>message</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=n>url</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>gotify_host</span><span class=si>}</span><span class=s2>/message?token=</span><span class=si>{</span><span class=n>gotify_token</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=n>data</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=n>title</span><span class=p>,</span> <span class=s2>&#34;message&#34;</span><span class=p>:</span> <span class=n>message</span><span class=p>,</span> <span class=s2>&#34;priority&#34;</span><span class=p>:</span> <span class=mi>7</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=n>resp</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=n>url</span><span class=p>,</span> <span class=n>json</span><span class=o>=</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=err> </span>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>sign</span><span class=p>(</span><span class=n>playwright</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>chromium</span> <span class=o>=</span> <span class=n>playwright</span><span class=o>.</span><span class=n>chromium</span>
+</span></span><span class=line><span class=cl>    <span class=n>browser</span> <span class=o>=</span> <span class=k>await</span> <span class=n>chromium</span><span class=o>.</span><span class=n>launch</span><span class=p>(</span><span class=n>headless</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>proxy</span><span class=o>=</span><span class=n>PROXY</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>context</span> <span class=o>=</span> <span class=k>await</span> <span class=n>browser</span><span class=o>.</span><span class=n>new_context</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>ignore_https_errors</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>user_agent</span><span class=o>=</span><span class=s2>&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 从文件读取 Cookie</span>
+</span></span><span class=line><span class=cl>    <span class=n>context</span> <span class=o>=</span> <span class=k>await</span> <span class=n>browser</span><span class=o>.</span><span class=n>new_context</span><span class=p>(</span><span class=n>storage_state</span><span class=o>=</span><span class=n>cookie_file</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>page</span> <span class=o>=</span> <span class=k>await</span> <span class=n>context</span><span class=o>.</span><span class=n>new_page</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 隐藏 webdriver 特征</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>stealth_async</span><span class=p>(</span><span class=n>page</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 判断登录状态</span>
+</span></span><span class=line><span class=cl>    <span class=c1># v2ex 需要先访问首页才能带 referer，不然无法签到。参考：https://www.v2ex.com/t/846469</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>page</span><span class=o>.</span><span class=n>goto</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=k>await</span> <span class=n>page</span><span class=o>.</span><span class=n>get_by_text</span><span class=p>(</span><span class=s2>&#34;记事本&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>focus</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>logger</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=n>签到成功</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>msg</span> <span class=o>=</span> <span class=s2>&#34;Cookie 过期&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>logger</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=n>msg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 签到</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>page</span><span class=o>.</span><span class=n>goto</span><span class=p>(</span><span class=n>sign_url</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=n>sign_button</span> <span class=o>:=</span> <span class=k>await</span> <span class=n>page</span><span class=o>.</span><span class=n>get_by_text</span><span class=p>(</span><span class=s2>&#34;领取 X 铜币&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>first</span>
+</span></span><span class=line><span class=cl>		<span class=n>sign_button</span><span class=o>.</span><span class=n>click</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>msg</span> <span class=o>=</span> <span class=s2>&#34;领取铜币成功&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=n>msg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>msg</span> <span class=o>=</span> <span class=s2>&#34;今日铜币已领取&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=n>msg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 推送消息</span>
+</span></span><span class=line><span class=cl>    <span class=n>push_msg</span><span class=p>(</span><span class=n>title</span><span class=p>,</span> <span class=n>msg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 退出</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>browser</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>async</span> <span class=k>with</span> <span class=n>async_playwright</span><span class=p>()</span> <span class=k>as</span> <span class=n>playwright</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>await</span> <span class=n>sign</span><span class=p>(</span><span class=n>playwright</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>那么这么方便好用的代价是什么呢？</strong></p><h3 id=webdriver-检测>webdriver 检测</h3><p>原生框架过不了 <a href=https://bot.sannysoft.com/ target=_blank rel="noopener noreferrer">webdriver 检测</a>。
+<img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/07/22/mfsbU6z4OinI5ey.png data-srcset="https://s2.loli.net/2023/07/22/mfsbU6z4OinI5ey.png, https://s2.loli.net/2023/07/22/mfsbU6z4OinI5ey.png 1.5x, https://s2.loli.net/2023/07/22/mfsbU6z4OinI5ey.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/07/22/mfsbU6z4OinI5ey.png title=https://s2.loli.net/2023/07/22/mfsbU6z4OinI5ey.png></p><p>解决办法：使用 <a href=https://pypi.org/project/playwright-stealth/ target=_blank rel="noopener noreferrer">playwright-stealth</a> 绕过。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>page</span> <span class=o>=</span> <span class=k>await</span> <span class=n>context</span><span class=o>.</span><span class=n>new_page</span><span class=p>()</span>  <span class=c1># 新页面</span>
+</span></span><span class=line><span class=cl><span class=c1># 隐藏 webdriver 特征</span>
+</span></span><span class=line><span class=cl><span class=k>await</span> <span class=n>stealth_async</span><span class=p>(</span><span class=n>page</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/07/22/o3qdSXDznML2ZkR.png data-srcset="https://s2.loli.net/2023/07/22/o3qdSXDznML2ZkR.png, https://s2.loli.net/2023/07/22/o3qdSXDznML2ZkR.png 1.5x, https://s2.loli.net/2023/07/22/o3qdSXDznML2ZkR.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/07/22/o3qdSXDznML2ZkR.png title=https://s2.loli.net/2023/07/22/o3qdSXDznML2ZkR.png></p><p>而 Selenium 什么设置都不需要就能绕过，更多常用参数可以看这个 <a href=https://gist.github.com/eve2ptp/631b3804340bd93aa914ecf9e3d8cc84 target=_blank rel="noopener noreferrer">init_selenium_driver.py</a>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>selenium</span> <span class=kn>import</span> <span class=n>webdriver</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>driver</span> <span class=o>=</span> <span class=n>webdriver</span><span class=o>.</span><span class=n>Chrome</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>driver</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;https://bot.sannysoft.com/&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>driver</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/07/22/iuOeYfLkrp7lTBC.png data-srcset="https://s2.loli.net/2023/07/22/iuOeYfLkrp7lTBC.png, https://s2.loli.net/2023/07/22/iuOeYfLkrp7lTBC.png 1.5x, https://s2.loli.net/2023/07/22/iuOeYfLkrp7lTBC.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/07/22/iuOeYfLkrp7lTBC.png title=https://s2.loli.net/2023/07/22/iuOeYfLkrp7lTBC.png></p><h3 id=alpine-精简镜像的问题>alpine 精简镜像的问题</h3><p>根据 <a href=https://github.com/whyour/qinglong/issues/1645#issuecomment-1271104882 target=_blank rel="noopener noreferrer">青龙无法安装python3的pycryptodome依赖</a> 的说法，青龙平台使用 apline 镜像精简了很多东西，虽然体积小，但有很多依赖是需要进行编译安装的。而 alpine 本身的 C 实现是和 debian 这类系统是有区别的，导致即使库安装上了，却依然用不了</p><p>容器内部安装 playwright 失败。
+<img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/07/22/2ifWT4CwXaZLIs3.png data-srcset="https://s2.loli.net/2023/07/22/2ifWT4CwXaZLIs3.png, https://s2.loli.net/2023/07/22/2ifWT4CwXaZLIs3.png 1.5x, https://s2.loli.net/2023/07/22/2ifWT4CwXaZLIs3.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/07/22/2ifWT4CwXaZLIs3.png title=https://s2.loli.net/2023/07/22/2ifWT4CwXaZLIs3.png></p><p>而容器外部能正常安装。
+<img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/07/22/l8LBcnpeRtxb5Yu.png data-srcset="https://s2.loli.net/2023/07/22/l8LBcnpeRtxb5Yu.png, https://s2.loli.net/2023/07/22/l8LBcnpeRtxb5Yu.png 1.5x, https://s2.loli.net/2023/07/22/l8LBcnpeRtxb5Yu.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/07/22/l8LBcnpeRtxb5Yu.png title=https://s2.loli.net/2023/07/22/l8LBcnpeRtxb5Yu.png></p><p>即便 ddddocr 能在容器外部搭建 API 服务器解决，但要改仓库里面的镜像还有一大堆引用实现 playwright 实在不优雅，寄了。</p><p><strong>吗？</strong></p><p><em><strong>Update At 2023-07-18</strong></em></p><h2 id=whyourqinglongdebian>whyour/qinglong:debian</h2><p>仓库作者<a href=https://github.com/whyour/qinglong/issues/1645#issuecomment-1639634114 target=_blank rel="noopener noreferrer">最新回复</a>：可以使用 <a href=https://github.com/whyour/qinglong/issues/1895 target=_blank rel="noopener noreferrer">whyour/qinglong:debian</a> 镜像。</p><p>经测试容器内能安装上 playwright，但是<strong>树莓派 3B+ 孱弱的性能</strong>实在无法支持从容器内部执行 playwright。</p><p>而容器外部的原生环境执行一次签到需要一分钟多点（PC 平台5秒左右），所以在容器外部通过 <a href=https://apscheduler.readthedocs.io/en/3.x/ target=_blank rel="noopener noreferrer">apscheduler</a> 错开一分钟实现定时签到。</p><p>又是白忙活的一天。</p><h2 id=不推荐playwright-websocket-server>[不推荐]playwright Websocket Server</h2><p>一开始是想看看有没有人在 alpine 内部安装 playwright 的，然后搜到 <a href=https://playwright-ruby-client.vercel.app/docs/article/guides/playwright_on_alpine_linux target=_blank rel="noopener noreferrer">playwright_on_alpine_linux</a>：
+<img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/07/22/L9n2NTxHeuyiYCm.png data-srcset="https://s2.loli.net/2023/07/22/L9n2NTxHeuyiYCm.png, https://s2.loli.net/2023/07/22/L9n2NTxHeuyiYCm.png 1.5x, https://s2.loli.net/2023/07/22/L9n2NTxHeuyiYCm.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/07/22/L9n2NTxHeuyiYCm.png title=https://s2.loli.net/2023/07/22/L9n2NTxHeuyiYCm.png></p><p>官方提供了相应 Dockerfile，只要安装 [playwright-python-remote](<a href=https://github.com/YusukeIwaki/playwright-python-remote target=_blank rel="noopener noreferrer">https://github.com/YusukeIwaki/playwright-python-remote</a> 用 websocket 连接即可调用远程 playwright server。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>pip install git+https://github.com/YusukeIwaki/playwright-python-remote
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>playwright_remote.sync_api</span> <span class=kn>import</span> <span class=n>sync_playwright_remote</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>sync_playwright_remote</span><span class=p>(</span><span class=s1>&#39;ws://127.0.0.1:8080/ws&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>playwright</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=k>with</span> <span class=n>playwright</span><span class=o>.</span><span class=n>chromium</span><span class=o>.</span><span class=n>launch</span><span class=p>()</span> <span class=k>as</span> <span class=n>browser</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>page</span> <span class=o>=</span> <span class=n>browser</span><span class=o>.</span><span class=n>new_page</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>page</span><span class=o>.</span><span class=n>goto</span><span class=p>(</span><span class=s1>&#39;https://github.com/YusukeIwaki&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>page</span><span class=o>.</span><span class=n>screenshot</span><span class=p>(</span><span class=n>path</span><span class=o>=</span><span class=s1>&#39;YusukeIwaki.png&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>已在 Issue 评论区补充了<a href=https://github.com/whyour/qinglong/issues/1645#issuecomment-1638375652 target=_blank rel="noopener noreferrer">实现方法</a>，经测试，能从容器内部调用外部的 playwright ws 连接，但效率感人。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-07-30&nbsp;<a class=git-hash href=https://github.com/sunt-programator/EnjoyIt/commit/f3ea51abf4a1ba8f9b29be6d92ad561281cc3b42 target=_blank rel="noopener noreferrer" title="commit by Evilmass(21218296+Evilmass@users.noreply.github.com) f3ea51abf4a1ba8f9b29be6d92ad561281cc3b42: update posts">
+<i class="fas fa-hashtag fa-fw"></i>f3ea51a</a></span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/posts/checkin/index.md target=_blank rel="noopener noreferrer">Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://evilmass.github.io/posts/checkin/ data-title=在树莓派部署青龙签到平台 data-hashtags=青龙面板,树莓派,playwright><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://evilmass.github.io/posts/checkin/ data-hashtag=青龙面板><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://evilmass.github.io/posts/checkin/ data-title=在树莓派部署青龙签到平台><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://evilmass.github.io/posts/checkin/ data-title=在树莓派部署青龙签到平台><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://evilmass.github.io/posts/checkin/ data-title=在树莓派部署青龙签到平台><i class="fab fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF/>青龙面板</a>,&nbsp;<a href=/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/>树莓派</a>,&nbsp;<a href=/tags/playwright/>playwright</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/oneindex/ class=prev rel=prev title=搭建一个属于自己的在线网盘><i class="fas fa-angle-left fa-fw"></i>搭建一个属于自己的在线网盘</a>
+<a href=/posts/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E8%BF%81%E7%A7%BB/ class=next rel=next title=笔记软件迁移>笔记软件迁移<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=tcomment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://twikoo.js.org/>Twikoo</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><span id=busuanzi_container_site_pv>Site PV: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>•</span>
+<span id=busuanzi_container_site_uv>Site UV: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><div class=footer-line><a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.110.0">Hugo</a> - <a href=https://github.com/xinyu-yang/EnjoyIt target=_blank rel="noopener noreferrer" title="EnjoyIt 0.0.1"><i class="fas fa-heart fa-fw"></i>EnjoyIt</a><span class=division> •</span>
+<i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2023</span>&nbsp;•&nbsp;<span class=license><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw"></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/twikoo@1.6.15/dist/twikoo.all.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{twikoo:{el:"#tcomment",envId:"https://twikoo-uqga.vercel.app/",meta:"zh-CN"}}}</script><script type=text/javascript src=/js/theme.a63aa926c3cd8d6695367caa381f19bdaa78efc1bd87b33c0a4968ca187b5c7f.js integrity="sha256-pjqpJsPNjWaVNnyqOB8Zvap478G9h7M8Ckloyhh7XH8="></script></body></html>

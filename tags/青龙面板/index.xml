@@ -1,0 +1,7 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>青龙面板 - Tag - Evilmass</title><link>https://evilmass.github.io/tags/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF/</link><description>青龙面板 - Tag - Evilmass</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 17 Jul 2023 19:42:12 +0800</lastBuildDate><atom:link href="https://evilmass.github.io/tags/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF/" rel="self" type="application/rss+xml"/><item><title>在树莓派部署青龙签到平台</title><link>https://evilmass.github.io/posts/checkin/</link><pubDate>Mon, 17 Jul 2023 19:42:12 +0800</pubDate><author>Author</author><guid>https://evilmass.github.io/posts/checkin/</guid><description>框架选择 QD 基于 HAR 的定时任务平台，上手简单。但是对于开发自由度来说不够高，也不好处理动态加载的页面。
+青龙面板 相对友好的定时任务平台，自带依赖管理（Nodejs、Python、Linux），脚本类则支持 Python3、JavaScript、Shell、Typescript。
+部署 1 2 3 4 5 6 7 8 # curl -sSL get.docker.com | sh docker run -dit \ -v $PWD/ql/data:/ql/data \ -p 5700:5700 \ --name qinglong \ --hostname qinglong \ --restart unless-stopped \ whyour/qinglong:debain 坑点：
+whyour/qinglong:latest 默认使用 alpine 精简镜像导致很多 python 依赖无法安装 因此选择 whyour/qinglong:debain 镜像。 签到脚本 本来是想用 requests 一把梭的，但是吾爱破解的签到页面用了动态加载 js ，直接访问接口会提示：请开启JavaScript并刷新该页。
+想了解三者区别可以看这个：Playwright VS Selenium VS Puppeteer VS Cypress。
+当时想着尝试新东西选了 playwright，体验很好，不再需要折腾各种新旧版本的 webdriver。
+然后如无意外的出意外了。</description></item></channel></rss>

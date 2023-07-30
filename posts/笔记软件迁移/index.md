@@ -1,0 +1,183 @@
+# 笔记软件迁移
+
+
+## 理由
+### OneNote
+OneNote 的笔记是真正意义上的笔记，分页层级清晰，网页端的根据所选部分裁剪和全文裁剪功能更是一流。但是：
+1. 不支持 Markdown，而且微软官方也停止功能更新了。
+2. 一旦裁剪的内容多了不定时分类就会很乱，没有进知识体系（自身问题）。
+
+### vscode
+用 vscode 写博客文章也不顺手：
+1. 实时渲染（Live Preview）不理想。段落一长就要往右拖滚动栏。
+2. 每次打开 Markdown 文件要么自动打开另一侧的 Preview（简单修改文件又得手动关），要么每次都手动打开。
+3. OneNote 双向同步略麻烦。
+4. 插件多了之后启动速度变慢。
+
+所以尝试一下 Obsidian，看看能不能将平时的 `信息收集 + 写作流` 迁移过来。
+
+## 基础设置
+### 语言
+About -> Language -> 简体中文
+
+## 字体
+[雾霭文楷](https://github.com/lxgw/LxgwWenKai) 这字体是真好看。
+![](https://s2.loli.net/2023/07/22/fBjUGsgXtzOlERb.png)
+
+### 主题
+[Things](https://github.com/colineckert/obsidian-things)
+![](https://s2.loli.net/2023/07/22/xuT7RqUwiZ8Y2XP.png)
+
+### 自用快捷键
+默认的小窗预览文件好评，常用且实用。
+![](https://s2.loli.net/2023/07/22/tKh2A9ZxmnpdGlI.png)
+
+CMD + 鼠标悬停链接 -> 预览文件
+Ctrl + E -> 切换 编辑/预览 模式
+Ctrl + O -> 打开最近文件
+Ctrl + Shift + F -> 在所有文件内搜索内容
+Ctrl + N -> 新建文件
+Ctrl + R -> 文本内替换
+Ctrl + T -> 类似浏览器的新建页面
+Ctrl + \[1-9] -> 切换标签页 
+Ctrl + Alt + = -> 左右分屏
+Ctrl + G -> 关系图【不常用】
+
+### For Markdown
+Ctrl + Shift + I -> *斜体* <em></em>
+Ctrl + Shift + B -> **加粗**
+Ctrl + Shift + N -> 用模板新建文件
+Ctrl + Shift + L -> 添加超链接
+Ctrl + Shift + K -> 添加代办事项
+Ctrl + ] -> 缩进
+Ctrl + \[ -> 取消缩进
+
+### 段内换行 + 选中多个关键词 + 全选关键词
+[[笔记软件迁移#Code Editor Shortcuts|额外的快捷键]]
+
+## 引用
+### 文件引用
+写法：\[[file]] 
+功能：引入文件。如果 file 不存在，会创建虚链接，Ctrl + 鼠标左键会自动创建文件。
+示例：[[笔记软件迁移]]
+
+### 节选引用
+写法：\[[file#title]] 
+功能：节选段落内容。
+示例：[[笔记软件迁移#基础设置]]
+
+### 别名引用
+写法：!\[[file|shortname]] 
+功能：某个段落标题过长可以用别名替代。
+示例：[[笔记软件迁移#常用快捷键]] -> [[笔记软件迁移#常用快捷键|快捷键]]
+
+### 块引用
+写法：!\[[file^]] 
+功能：原地展开内容。
+注意事项：**不能套娃**，不然会一直加载这部分的内容。
+示例：!\[[笔记软件迁移#语言]]
+![[笔记软件迁移#语言]]
+
+### 嵌入引用
+#### 全内容
+写法：!\[[file]] 
+功能：内嵌文章内容。
+示例：!\[[你好]]
+![[你好]]
+
+#### 部分内容
+写法：!\[[file]] 
+功能：内嵌文章节选内容。
+示例：!\[[你好#^d4edbb|only_print_hello]]
+![[你好#^d4edbb|only_print_hello]]
+
+## 模板
+此前执行 hugo new posts/\<dir>/\<new_post.md> 会在 `dir` 目录新建文章 `new_post.md`。
+现在创建模板后新建文章文件也可以添加一样的文件头。新建模板目录 `templates`，然后写入以下内容：
+![](https://s2.loli.net/2023/07/22/4LwGl7EujiIaOxR.png)
+
+模板日期格式改成 `YYYY-MM-DDTHH:MM:SS+08:00` 是为了 `Github Actions` 更新博客后返回正常的文章发布时间。
+![](https://s2.loli.net/2023/07/23/79PASdHufnGFrW1.png)
+
+## 插件
+### Code Editor Shortcuts
+几个常用的快捷键在默认设置里面居然没有，安装 [Code Editor Shortcuts]([obsidian-editor-shortcuts](https://github.com/timhor/obsidian-editor-shortcuts) 替换。
+> 段内换行（Ctrl + Enter）
+> 段内向上换行（Ctrl + Shift + Enter）
+> 同字母多选（Ctrl + D）
+> 同字母全选（Ctrl + Alt + D）
+
+### Lacal REST API
+裁剪网页笔记后保存到 obsidian。
+    
+PS. 我在没完全搞懂的情况下买了简阅高级会员，实在不理智。简阅这种**功能繁复 + 文档混乱**的页面我就应该第一时间右上角关闭的。还要所谓的高级会员功能体验如下：
+
+    使用网页剪辑功能要先进入阅读模式（快捷键 a a），还要确保 markdown 模板渲染不出问题。
+    然后再按下快捷键（o b）导出到 obsidian。
+
+虽然一直开着 obsidian 也不算什么问题，但相比 OneNote 差的不是一星半点。 
+
+但目前唯一勉强能用的 [obsidian-web](https://chrome.google.com/webstore/detail/obsidian-web/edoacekkjanmingkbkgjndndibhkegad)插件遇到代码块渲染也有问题，后续再看看有没有更好的替代品。
+
+### Natural Languagues Dates
+方便在笔记内打出格式化的时间。
+
+	@time:now -> 2023-07-22 03:28:22
+
+### Remotely Save
+通过 OneNote 完成云同步。
+
+## 手机端
+主要作用有两个：
+1. 看完 RSS 订阅后记录关键词和文章大体框架，后面再完善整篇文章。
+2. 记录当下想法或者发送手机截图发送到 obsidian 用于后续写作。
+
+> 一方面，手机屏幕的阅读体验远不如电脑，没必要在手机上输入输出太多内容。
+> 
+> 另一方面，博客文章图片使用图床但同时留有本地图片备份。
+
+如果对整个文章仓库启用双向同步，那么对比文件一多，同步就慢 + 手机相册乱。
+
+因此**手机端设置双向同步的文件夹是临时文件夹**，只用作记录想法和传手机截图用。但不知道为什么手机端的 Remotely Save 插件启动不了，转用 [FolderSYnc]() 完成。
+
+FolderSync 指定两边同步的目录。
+![](https://s2.loli.net/2023/07/22/dIfntJXayi6Ypb2.jpg)
+
+点击右上方的心形按钮收藏临时目录方便后续从图库分享。
+![](https://s2.loli.net/2023/07/22/7wMeVcQLy1fHUDX.jpg)
+
+手机端添加一条笔记。
+![](https://s2.loli.net/2023/07/22/Y7BFDmlLOSzjJIy.jpg)
+
+从手机图库分享图片到 FolderSync。
+![](https://s2.loli.net/2023/07/22/YML3oG6g1mbcWC2.jpg)
+
+手机端设置快捷方式完成双向同步。
+![](https://s2.loli.net/2023/07/22/KxjMUniCtPfOlqo.jpg)
+
+电脑端同步后， obsidian/Z_trans 文件夹已获取到相应更新，此时修改笔记。
+![](https://s2.loli.net/2023/07/22/DeO1RFzIBCfXl5b.png)
+
+手机端再次同步后能看到最新的修改内容。
+![](https://s2.loli.net/2023/07/22/x2ugP1QfUKY3oZv.jpg)
+
+## 使用感受
+实际使用下来，配合番茄钟的沉浸式写作体验非常好。如果只考虑纯文本写作：
+
+> 甚至不用 Markdown 格式写作；
+> 不怎么插入图片；
+> 不考虑排版和生成流程图；
+> 不去研究主题和 css 样式；
+> 不去调整文字的大小和颜色；
+> 不好奇各种插件的用法；
+
+obsidian 设置好快捷键就能用且好用，所以我个人很推崇 [Gotify](https://github.com)这类软件：do one thing，and do well。
+
+## 高级配置？
+工具配置只服务于实际需求，**没有需求就不要创造需求**。
+
+唯有长期、稳定、高效的工作流程才值得我们花时间学习和配置，除非它哪天倒闭和变质了（
+
+
+
+

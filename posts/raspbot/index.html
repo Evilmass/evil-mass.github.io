@@ -1,0 +1,226 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>我在树莓派上跑了多少服务 - Evilmass</title><meta name=description content="About EnjoyIt Theme"><meta property="og:title" content="我在树莓派上跑了多少服务"><meta property="og:description" content="你真的需要云服务器吗 大二买的 Raspberry Pi 3B+ 至今服役在家里的路由器旁，虽然我从未拿它做什么正儿八经的研究和生产，但是想要折腾新东西的时候总是先在上面跑。
+想起前几年买的国内云学生机，食之无味弃之不可惜。一方面写写博客纯静态页面挂载在 GitHub 上足够，另一方面很多用得到的服务也不需要这么多性能。
+fail2Ban 仓库地址：fail2Ban
+如果用的是 Python3，需要先执行一遍 ./fail2ban-2to3。不然会报如下错误：
+1 ERROR: No module named 'ConfigParser' aliddns 仓库地址：aliddns
+广州电信给了公网 IPV4 地址，路由器也开启了相应 ddns 以及端口映射。树莓派的 ddns 主要是解析 IPV6 地址，多点保险手段总是好的。
+UnblockNeteaseMusic 仓库地址：UnblockNeteaseMusic
+Clash 仓库地址：Clash
+自用机场和 WARP(wireproxy) 两套配置，后者反而还稳定些（低频率请求）。
+go-cqhttp 仓库地址：go-cqhttp
+配合 nonebot 插件跑 qq 机器人，平时搜搜图还是很好用的。
+v2ray 仓库地址：V2ray
+前两年折腾联通 host 免流：直接花三块钱买网上提供的云免流服务，直接把各种 host 保存下来。一不需要手机安装 PackageCapture 抓包，二不怕短期失效。
+pull.free.video.10010.com shoutingtoutiao1.10010.com 现在公司和家里的 WiFi 覆盖时间已经完全不需要折腾了。工作之后对时间开销看得更重：能花钱解决的中长期（持续需求）问题一律花钱解决。
+当然，国内网盘这种东西不值得我付费。
+OneDrive 之前也尝试过用全量备份脚本然后隔段时间就保存到电脑，但是压缩镜像耗时问题以及反复解压很容易忘记备份了什么。
+现在干脆直接将本地目录（常用软件、各类配置文件）整个上传到 OneDrive，crontab 下加一行实现定时增量备份。
+1 /home/pi/bin/rclone sync /home/pi/ rasp:/Raspberry --transfers 16 -P --onedrive-chunk-size 40M 用到的 Rclone 配置看这篇：Linux使用Rclone挂载OneDrive网盘"><meta property="og:type" content="article"><meta property="og:url" content="https://evilmass.github.io/posts/raspbot/"><meta property="og:image" content="https://evilmass.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-01-29T17:04:42+08:00"><meta property="article:modified_time" content="2023-07-23T01:10:26+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://evilmass.github.io/logo.png"><meta name=twitter:title content="我在树莓派上跑了多少服务"><meta name=twitter:description content="你真的需要云服务器吗 大二买的 Raspberry Pi 3B+ 至今服役在家里的路由器旁，虽然我从未拿它做什么正儿八经的研究和生产，但是想要折腾新东西的时候总是先在上面跑。
+想起前几年买的国内云学生机，食之无味弃之不可惜。一方面写写博客纯静态页面挂载在 GitHub 上足够，另一方面很多用得到的服务也不需要这么多性能。
+fail2Ban 仓库地址：fail2Ban
+如果用的是 Python3，需要先执行一遍 ./fail2ban-2to3。不然会报如下错误：
+1 ERROR: No module named 'ConfigParser' aliddns 仓库地址：aliddns
+广州电信给了公网 IPV4 地址，路由器也开启了相应 ddns 以及端口映射。树莓派的 ddns 主要是解析 IPV6 地址，多点保险手段总是好的。
+UnblockNeteaseMusic 仓库地址：UnblockNeteaseMusic
+Clash 仓库地址：Clash
+自用机场和 WARP(wireproxy) 两套配置，后者反而还稳定些（低频率请求）。
+go-cqhttp 仓库地址：go-cqhttp
+配合 nonebot 插件跑 qq 机器人，平时搜搜图还是很好用的。
+v2ray 仓库地址：V2ray
+前两年折腾联通 host 免流：直接花三块钱买网上提供的云免流服务，直接把各种 host 保存下来。一不需要手机安装 PackageCapture 抓包，二不怕短期失效。
+pull.free.video.10010.com shoutingtoutiao1.10010.com 现在公司和家里的 WiFi 覆盖时间已经完全不需要折腾了。工作之后对时间开销看得更重：能花钱解决的中长期（持续需求）问题一律花钱解决。
+当然，国内网盘这种东西不值得我付费。
+OneDrive 之前也尝试过用全量备份脚本然后隔段时间就保存到电脑，但是压缩镜像耗时问题以及反复解压很容易忘记备份了什么。
+现在干脆直接将本地目录（常用软件、各类配置文件）整个上传到 OneDrive，crontab 下加一行实现定时增量备份。
+1 /home/pi/bin/rclone sync /home/pi/ rasp:/Raspberry --transfers 16 -P --onedrive-chunk-size 40M 用到的 Rclone 配置看这篇：Linux使用Rclone挂载OneDrive网盘"><meta name=application-name content="Evilmass"><meta name=apple-mobile-web-app-title content="Evilmass"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://evilmass.github.io/posts/raspbot/><link rel=prev href=https://evilmass.github.io/posts/trollinggfw/><link rel=next href=https://evilmass.github.io/posts/warp/><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css><link rel=stylesheet href=/css/style.min.a409af070546af1c10d0fd62cfe22c39a6b7144f59f987322a36a9b61b80360b.css integrity="sha256-pAmvBwVGrxwQ0P1iz+IsOaa3FE9Z+YcyKjapthuANgs="><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我在树莓派上跑了多少服务","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/evilmass.github.io\/posts\/raspbot\/"},"image":["https:\/\/evilmass.github.io\/images\/Apple-Devices-Preview.png"],"genre":"posts","keywords":"Raspberry, 树莓派","wordcount":428,"url":"https:\/\/evilmass.github.io\/posts\/raspbot\/","datePublished":"2022-01-29T17:04:42+08:00","dateModified":"2023-07-23T01:10:26+08:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"xxxx","logo":"https:\/\/evilmass.github.io\/images\/avatar.png"},"author":{"@type":"Person","name":"Evilmass"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=Evilmass><span class=header-title-pre><i class='fas fa-heart fa-fw'></i></span>Evilmass</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=Evilmass><span class=header-title-pre><i class='fas fa-heart fa-fw'></i></span>Evilmass</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">我在树莓派上跑了多少服务</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>Evilmass</a></span>&nbsp;<span class=post-category>included in <a href=/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/><i class="far fa-folder fa-fw"></i>树莓派</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-29>2022-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;428 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;<span><i class="far fa-eye fa-fw"></i>&nbsp;<span id=twikoo_visiotors>-1</span>&nbsp;views
+</span>&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#你真的需要云服务器吗>你真的需要云服务器吗</a></li><li><a href=#fail2ban>fail2Ban</a></li><li><a href=#aliddns>aliddns</a></li><li><a href=#unblockneteasemusic>UnblockNeteaseMusic</a></li><li><a href=#clash>Clash</a></li><li><a href=#go-cqhttp>go-cqhttp</a></li><li><a href=#v2ray>v2ray</a></li><li><a href=#onedrive>OneDrive</a></li><li><a href=#telegrambot>telegrambot</a></li></ul></nav></div></div><div class=content id=content><h2 id=你真的需要云服务器吗>你真的需要云服务器吗</h2><p>大二买的 Raspberry Pi 3B+ 至今服役在家里的路由器旁，虽然我从未拿它做什么正儿八经的研究和生产，但是想要折腾新东西的时候总是先在上面跑。</p><p>想起前几年买的国内云学生机，食之无味弃之不可惜。一方面写写博客纯静态页面挂载在 <a href=https://github.com target=_blank rel="noopener noreferrer">GitHub</a> 上足够，另一方面很多用得到的服务也不需要这么多性能。</p><h2 id=fail2ban>fail2Ban</h2><p>仓库地址：<a href=https://github.com/fail2ban/fail2ban/wiki/How-to-install-or-upgrade-fail2ban-manually target=_blank rel="noopener noreferrer">fail2Ban</a></p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/01/29/inwGSRNytvZEUxQ.jpg data-srcset="https://s2.loli.net/2023/01/29/inwGSRNytvZEUxQ.jpg, https://s2.loli.net/2023/01/29/inwGSRNytvZEUxQ.jpg 1.5x, https://s2.loli.net/2023/01/29/inwGSRNytvZEUxQ.jpg 2x" data-sizes=auto alt=https://s2.loli.net/2023/01/29/inwGSRNytvZEUxQ.jpg title=https://s2.loli.net/2023/01/29/inwGSRNytvZEUxQ.jpg></p><p>如果用的是 <code>Python3</code>，需要先执行一遍 <code>./fail2ban-2to3</code>。不然会报如下错误：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ERROR: No module named <span class=s1>&#39;ConfigParser&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=aliddns>aliddns</h2><p>仓库地址：<a href=https://github.com/OpenIoTHub/aliddns target=_blank rel="noopener noreferrer">aliddns</a></p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/01/29/BzehY8rCPJwsjZu.png data-srcset="https://s2.loli.net/2023/01/29/BzehY8rCPJwsjZu.png, https://s2.loli.net/2023/01/29/BzehY8rCPJwsjZu.png 1.5x, https://s2.loli.net/2023/01/29/BzehY8rCPJwsjZu.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/01/29/BzehY8rCPJwsjZu.png title=https://s2.loli.net/2023/01/29/BzehY8rCPJwsjZu.png></p><p>广州电信给了公网 IPV4 地址，路由器也开启了相应 ddns 以及端口映射。树莓派的 ddns 主要是解析 IPV6 地址，多点保险手段总是好的。</p><h2 id=unblockneteasemusic>UnblockNeteaseMusic</h2><p>仓库地址：<a href=https://github.com/nondanee/UnblockNeteaseMusic target=_blank rel="noopener noreferrer">UnblockNeteaseMusic</a></p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/01/29/rFsUO5Y4iAMv96f.png data-srcset="https://s2.loli.net/2023/01/29/rFsUO5Y4iAMv96f.png, https://s2.loli.net/2023/01/29/rFsUO5Y4iAMv96f.png 1.5x, https://s2.loli.net/2023/01/29/rFsUO5Y4iAMv96f.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/01/29/rFsUO5Y4iAMv96f.png title=https://s2.loli.net/2023/01/29/rFsUO5Y4iAMv96f.png></p><h2 id=clash>Clash</h2><p>仓库地址：<a href=https://github.com/Dreamacro/clash target=_blank rel="noopener noreferrer">Clash</a></p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/01/29/32QGty4mVhWBaFD.png data-srcset="https://s2.loli.net/2023/01/29/32QGty4mVhWBaFD.png, https://s2.loli.net/2023/01/29/32QGty4mVhWBaFD.png 1.5x, https://s2.loli.net/2023/01/29/32QGty4mVhWBaFD.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/01/29/32QGty4mVhWBaFD.png title=https://s2.loli.net/2023/01/29/32QGty4mVhWBaFD.png></p><p>自用机场和 WARP(wireproxy) 两套配置，后者反而还稳定些（低频率请求）。</p><h2 id=go-cqhttp>go-cqhttp</h2><p>仓库地址：<a href=https://github.com/Mrs4s/go-cqhttp target=_blank rel="noopener noreferrer">go-cqhttp</a></p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/01/29/sOn2edavQUtXJMh.png data-srcset="https://s2.loli.net/2023/01/29/sOn2edavQUtXJMh.png, https://s2.loli.net/2023/01/29/sOn2edavQUtXJMh.png 1.5x, https://s2.loli.net/2023/01/29/sOn2edavQUtXJMh.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/01/29/sOn2edavQUtXJMh.png title=https://s2.loli.net/2023/01/29/sOn2edavQUtXJMh.png></p><p>配合 nonebot 插件跑 qq 机器人，平时搜搜图还是很好用的。</p><h2 id=v2ray>v2ray</h2><p>仓库地址：<a href=https://github.com/v2fly/v2ray-core target=_blank rel="noopener noreferrer">V2ray</a></p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/01/29/PzsdTEh4F2jDXlI.png data-srcset="https://s2.loli.net/2023/01/29/PzsdTEh4F2jDXlI.png, https://s2.loli.net/2023/01/29/PzsdTEh4F2jDXlI.png 1.5x, https://s2.loli.net/2023/01/29/PzsdTEh4F2jDXlI.png 2x" data-sizes=auto alt=https://s2.loli.net/2023/01/29/PzsdTEh4F2jDXlI.png title=https://s2.loli.net/2023/01/29/PzsdTEh4F2jDXlI.png></p><p>前两年折腾联通 host 免流：直接花三块钱买网上提供的云免流服务，直接把各种 host 保存下来。一不需要手机安装 <code>PackageCapture</code> 抓包，二不怕短期失效。</p><pre><code>pull.free.video.10010.com
+shoutingtoutiao1.10010.com
+</code></pre><p>现在公司和家里的 WiFi 覆盖时间已经完全不需要折腾了。工作之后对时间开销看得更重：能花钱解决的中长期（持续需求）问题一律花钱解决。</p><p><strong>当然，国内网盘这种东西不值得我付费。</strong></p><h2 id=onedrive>OneDrive</h2><p>之前也尝试过用<a href=https://github.com/nanhantianyi/rpi-backup target=_blank rel="noopener noreferrer">全量备份脚本</a>然后隔段时间就保存到电脑，但是压缩镜像耗时问题以及反复解压很容易忘记备份了什么。</p><p>现在干脆直接将本地目录（常用软件、各类配置文件）整个上传到 <code>OneDrive</code>，<code>crontab</code> 下加一行实现定时增量备份。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>/home/pi/bin/rclone sync /home/pi/ rasp:/Raspberry --transfers <span class=m>16</span> -P --onedrive-chunk-size 40M
+</span></span></code></pre></td></tr></table></div></div><p>用到的 <code>Rclone</code> 配置看这篇：<a href=https://333rd.net/posts/tech/linux%E4%BD%BF%E7%94%A8rclone%E6%8C%82%E8%BD%BDonedrive%E7%BD%91%E7%9B%98/ target=_blank rel="noopener noreferrer">Linux使用Rclone挂载OneDrive网盘</a></p><h2 id=telegrambot>telegrambot</h2><p>文档地址：<a href=https://docs.python-telegram-bot.org/en/stable/ target=_blank rel="noopener noreferrer">python-telegram-bot</a></p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://s2.loli.net/2023/01/29/5vyo1N7m6XetH9j.webp data-srcset="https://s2.loli.net/2023/01/29/5vyo1N7m6XetH9j.webp, https://s2.loli.net/2023/01/29/5vyo1N7m6XetH9j.webp 1.5x, https://s2.loli.net/2023/01/29/5vyo1N7m6XetH9j.webp 2x" data-sizes=auto alt=https://s2.loli.net/2023/01/29/5vyo1N7m6XetH9j.webp title=https://s2.loli.net/2023/01/29/5vyo1N7m6XetH9j.webp></p><p>在外有电脑远程连回树莓派是挺方便，但是只有手机的情况下敲命令还反复缩放界面看服务运行情况就不太优雅了。</p><p>官方给的接口很全，只要你愿意，用 <code>Flask</code> 接入都没问题。功能少还是直接写比较快。</p><p>参考 <a href=https://github.com/Oreomeow/warpplus target=_blank rel="noopener noreferrer">Warpplus</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=ch>#!/usr/bin/env python3</span>
+</span></span><span class=line><span class=cl><span class=c1># -*- coding: utf-8 -*-</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>json</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>subprocess</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Optional</span><span class=p>,</span> <span class=n>Union</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>telegram</span> <span class=kn>import</span> <span class=n>Update</span><span class=p>,</span> <span class=n>error</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>telegram.ext</span> <span class=kn>import</span> <span class=n>CallbackContext</span><span class=p>,</span> <span class=n>CommandHandler</span><span class=p>,</span> <span class=n>Updater</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nb>format</span><span class=o>=</span><span class=s2>&#34;</span><span class=si>%(asctime)s</span><span class=s2> - </span><span class=si>%(name)s</span><span class=s2> - </span><span class=si>%(levelname)s</span><span class=s2> - </span><span class=si>%(message)s</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>level</span><span class=o>=</span><span class=n>logging</span><span class=o>.</span><span class=n>INFO</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Telegram bot API Token (可在 @botfather 获取)</span>
+</span></span><span class=line><span class=cl><span class=n>TOKEN</span> <span class=o>=</span> <span class=s2>&#34;TOKEN_HERE&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># Telegram 用户 ID (在 @getidsbot 发送 /start 获取)</span>
+</span></span><span class=line><span class=cl><span class=n>USER_ID</span> <span class=o>=</span> <span class=s2>&#34;USER_ID_HERE&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>RaspBot</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>user_id</span><span class=p>:</span> <span class=nb>int</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_user_id</span> <span class=o>=</span> <span class=nb>str</span><span class=p>(</span><span class=n>user_id</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_bot</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_update</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_message_id</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@staticmethod</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>is_who</span><span class=p>(</span><span class=n>update</span><span class=p>:</span> <span class=n>Update</span><span class=p>,</span> <span class=n>n</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span> <span class=o>=</span> <span class=mi>3</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>tuple</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>chat_id</span> <span class=o>=</span> <span class=n>update</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>chat_id</span>
+</span></span><span class=line><span class=cl>        <span class=n>user_id</span> <span class=o>=</span> <span class=n>update</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>from_user</span><span class=o>.</span><span class=n>id</span>
+</span></span><span class=line><span class=cl>        <span class=n>username</span> <span class=o>=</span> <span class=n>update</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>from_user</span><span class=o>.</span><span class=n>username</span>
+</span></span><span class=line><span class=cl>        <span class=n>first_name</span> <span class=o>=</span> <span class=n>update</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>from_user</span><span class=o>.</span><span class=n>first_name</span>
+</span></span><span class=line><span class=cl>        <span class=n>name</span> <span class=o>=</span> <span class=n>username</span> <span class=k>if</span> <span class=n>username</span> <span class=k>else</span> <span class=n>first_name</span>
+</span></span><span class=line><span class=cl>        <span class=n>chat_type</span> <span class=o>=</span> <span class=n>update</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>chat</span><span class=o>.</span><span class=n>type</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>6</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>chat_id</span><span class=p>,</span> <span class=n>user_id</span><span class=p>,</span> <span class=n>username</span><span class=p>,</span> <span class=n>first_name</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=n>chat_type</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>chat_id</span><span class=p>,</span> <span class=n>user_id</span><span class=p>,</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>send_command</span><span class=p>(</span><span class=n>update</span><span class=p>:</span> <span class=n>Update</span><span class=p>,</span> <span class=n>context</span><span class=p>:</span> <span class=n>CallbackContext</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>chat_id</span><span class=p>,</span> <span class=n>user_id</span><span class=p>,</span> <span class=n>name</span> <span class=o>=</span> <span class=n>RaspBot</span><span class=o>.</span><span class=n>is_who</span><span class=p>(</span><span class=n>update</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>name</span><span class=si>}</span><span class=s2> (</span><span class=si>{</span><span class=n>user_id</span><span class=si>}</span><span class=s2>) | 正在输入命令...&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>context</span><span class=o>.</span><span class=n>args</span><span class=p>:</span>  <span class=c1># 无参数</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span> <span class=o>=</span> <span class=s2>&#34;no args input&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>_args</span> <span class=o>=</span> <span class=n>context</span><span class=o>.</span><span class=n>args</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span> <span class=o>=</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=s2>&#34; &#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>_args</span><span class=p>),</span> <span class=n>stderr</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>,</span> <span class=n>stdout</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>,</span> <span class=n>shell</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;command: </span><span class=si>{</span><span class=n>_args</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;returncode: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>returncode</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;stderr: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>stderr</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;stdout: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># telegram 信息最大长度为 4096 bytes</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>stdout</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>4096</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span><span class=o>.</span><span class=n>stdout</span> <span class=o>=</span> <span class=n>result</span><span class=o>.</span><span class=n>stdout</span><span class=p>[:</span><span class=mi>4096</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>context</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>send_message</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>chat_id</span><span class=o>=</span><span class=n>chat_id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>text</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;returncode: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>returncode</span><span class=si>}</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=o>+</span><span class=sa>f</span><span class=s2>&#34;stderr: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>stderr</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span><span class=si>}</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=o>+</span><span class=sa>f</span><span class=s2>&#34;stdout: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span><span class=si>}</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>start</span><span class=p>(</span><span class=n>update</span><span class=p>:</span> <span class=n>Update</span><span class=p>,</span> <span class=n>context</span><span class=p>:</span> <span class=n>CallbackContext</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>chat_id</span><span class=p>,</span> <span class=n>user_id</span><span class=p>,</span> <span class=n>name</span> <span class=o>=</span> <span class=n>RaspBot</span><span class=o>.</span><span class=n>is_who</span><span class=p>(</span><span class=n>update</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;[+] </span><span class=si>{</span><span class=n>name</span><span class=si>}</span><span class=s2> (</span><span class=si>{</span><span class=n>user_id</span><span class=si>}</span><span class=s2>) | 欢迎使用&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>message_id</span> <span class=o>=</span> <span class=n>context</span><span class=o>.</span><span class=n>bot</span><span class=o>.</span><span class=n>send_message</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>chat_id</span><span class=o>=</span><span class=n>chat_id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>text</span><span class=o>=</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>name</span><span class=si>}</span><span class=s2>，欢迎使用</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=s2>&#34;/start - 开始使用</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=s2>&#34;/c - 命令行</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>parse_mode</span><span class=o>=</span><span class=s2>&#34;Markdown&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span><span class=o>.</span><span class=n>message_id</span>
+</span></span><span class=line><span class=cl>    <span class=n>del_msg</span><span class=p>(</span><span class=mi>60</span><span class=p>,</span> <span class=n>context</span><span class=p>,</span> <span class=n>chat_id</span><span class=p>,</span> <span class=n>message_id</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>updater</span> <span class=o>=</span> <span class=n>Updater</span><span class=p>(</span><span class=n>TOKEN</span><span class=p>,</span> <span class=n>use_context</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>request_kwargs</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;proxy_url&#34;</span><span class=p>:</span> <span class=s2>&#34;http://127.0.0.1:7890&#34;</span><span class=p>})</span>  <span class=c1># Updater 设置代理</span>
+</span></span><span class=line><span class=cl>    <span class=n>dp</span> <span class=o>=</span> <span class=n>updater</span><span class=o>.</span><span class=n>dispatcher</span>
+</span></span><span class=line><span class=cl>    <span class=n>dp</span><span class=o>.</span><span class=n>add_handler</span><span class=p>(</span><span class=n>CommandHandler</span><span class=p>(</span><span class=s2>&#34;start&#34;</span><span class=p>,</span> <span class=n>start</span><span class=p>,</span> <span class=n>run_async</span><span class=o>=</span><span class=kc>True</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>dp</span><span class=o>.</span><span class=n>add_handler</span><span class=p>(</span><span class=n>CommandHandler</span><span class=p>(</span><span class=s2>&#34;c&#34;</span><span class=p>,</span> <span class=n>send_command</span><span class=p>,</span> <span class=n>run_async</span><span class=o>=</span><span class=kc>True</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>updater</span><span class=o>.</span><span class=n>start_polling</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>updater</span><span class=o>.</span><span class=n>idle</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>还有一些签到类（b站直播间、v2ex）脚本就不提了，时效性一般。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-07-23&nbsp;<a class=git-hash href=https://github.com/sunt-programator/EnjoyIt/commit/23e161205406152a2a9077849679184f8d0f7b6b target=_blank rel="noopener noreferrer" title="commit by Evilmass(21218296+Evilmass@users.noreply.github.com) 23e161205406152a2a9077849679184f8d0f7b6b: rebuild">
+<i class="fas fa-hashtag fa-fw"></i>23e1612</a></span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/posts/raspbot/index.md target=_blank rel="noopener noreferrer">Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://evilmass.github.io/posts/raspbot/ data-title=我在树莓派上跑了多少服务 data-hashtags=Raspberry,树莓派><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://evilmass.github.io/posts/raspbot/ data-hashtag=Raspberry><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://evilmass.github.io/posts/raspbot/ data-title=我在树莓派上跑了多少服务><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://evilmass.github.io/posts/raspbot/ data-title=我在树莓派上跑了多少服务><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://evilmass.github.io/posts/raspbot/ data-title=我在树莓派上跑了多少服务><i class="fab fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/raspberry/>Raspberry</a>,&nbsp;<a href=/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/>树莓派</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/trollinggfw/ class=prev rel=prev title=当你的朋友需要科学上网的时候><i class="fas fa-angle-left fa-fw"></i>当你的朋友需要科学上网的时候</a>
+<a href=/posts/warp/ class=next rel=next title="WARP 作为科学上网备用手段">WARP 作为科学上网备用手段<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=tcomment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://twikoo.js.org/>Twikoo</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><span id=busuanzi_container_site_pv>Site PV: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>•</span>
+<span id=busuanzi_container_site_uv>Site UV: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><div class=footer-line><a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.110.0">Hugo</a> - <a href=https://github.com/xinyu-yang/EnjoyIt target=_blank rel="noopener noreferrer" title="EnjoyIt 0.0.1"><i class="fas fa-heart fa-fw"></i>EnjoyIt</a><span class=division> •</span>
+<i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2023</span>&nbsp;•&nbsp;<span class=license><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw"></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/twikoo@1.6.15/dist/twikoo.all.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{twikoo:{el:"#tcomment",envId:"https://twikoo-uqga.vercel.app/",meta:"zh-CN"}}}</script><script type=text/javascript src=/js/theme.a63aa926c3cd8d6695367caa381f19bdaa78efc1bd87b33c0a4968ca187b5c7f.js integrity="sha256-pjqpJsPNjWaVNnyqOB8Zvap478G9h7M8Ckloyhh7XH8="></script></body></html>

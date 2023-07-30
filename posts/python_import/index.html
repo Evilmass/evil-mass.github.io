@@ -1,0 +1,228 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>python import - Evilmass</title><meta name=description content="About EnjoyIt Theme"><meta property="og:title" content="python import"><meta property="og:description" content="目录结构 C:\USERS\EVILMASS\DESKTOP\PATH0 │ server.py ├───path1 │ │ func.py │ │ __init__.py └───path2 │ func.py │ __init__.py ├───path2_1 │ │ func.py │ │ __init__.py │ ├───path2_1_1 │ │ │ func.py │ │ │ special.py │ │ │ __init__.py __init__.py 一个 module1.py 文件可以看作一个模块：import module1
+__init__.py 则是将一个文件夹变为 package
+每一次 import 都会执行 __init__.py 内的代码。
+1 2 3 4 5 6 7 8 # no __init__.py from path2.path2_1.func import echo from path2.path2_1.special import echo_special # has __init__."><meta property="og:type" content="article"><meta property="og:url" content="https://evilmass.github.io/posts/python_import/"><meta property="og:image" content="https://evilmass.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-02-21T18:31:38+08:00"><meta property="article:modified_time" content="2023-07-23T01:10:26+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://evilmass.github.io/logo.png"><meta name=twitter:title content="python import"><meta name=twitter:description content="目录结构 C:\USERS\EVILMASS\DESKTOP\PATH0 │ server.py ├───path1 │ │ func.py │ │ __init__.py └───path2 │ func.py │ __init__.py ├───path2_1 │ │ func.py │ │ __init__.py │ ├───path2_1_1 │ │ │ func.py │ │ │ special.py │ │ │ __init__.py __init__.py 一个 module1.py 文件可以看作一个模块：import module1
+__init__.py 则是将一个文件夹变为 package
+每一次 import 都会执行 __init__.py 内的代码。
+1 2 3 4 5 6 7 8 # no __init__.py from path2.path2_1.func import echo from path2.path2_1.special import echo_special # has __init__."><meta name=application-name content="Evilmass"><meta name=apple-mobile-web-app-title content="Evilmass"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://evilmass.github.io/posts/python_import/><link rel=prev href=https://evilmass.github.io/posts/multithreading/><link rel=next href=https://evilmass.github.io/posts/trollinggfw/><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css><link rel=stylesheet href=/css/style.min.a409af070546af1c10d0fd62cfe22c39a6b7144f59f987322a36a9b61b80360b.css integrity="sha256-pAmvBwVGrxwQ0P1iz+IsOaa3FE9Z+YcyKjapthuANgs="><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"python import","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/evilmass.github.io\/posts\/python_import\/"},"image":["https:\/\/evilmass.github.io\/images\/Apple-Devices-Preview.png"],"genre":"posts","keywords":"Python","wordcount":467,"url":"https:\/\/evilmass.github.io\/posts\/python_import\/","datePublished":"2021-02-21T18:31:38+08:00","dateModified":"2023-07-23T01:10:26+08:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"xxxx","logo":"https:\/\/evilmass.github.io\/images\/avatar.png"},"author":{"@type":"Person","name":"Evilmass"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=Evilmass><span class=header-title-pre><i class='fas fa-heart fa-fw'></i></span>Evilmass</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=Evilmass><span class=header-title-pre><i class='fas fa-heart fa-fw'></i></span>Evilmass</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">python import</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>Evilmass</a></span>&nbsp;<span class=post-category>included in <a href=/categories/python/><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-02-21>2021-02-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;467 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;<span><i class="far fa-eye fa-fw"></i>&nbsp;<span id=twikoo_visiotors>-1</span>&nbsp;views
+</span>&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#目录结构>目录结构</a></li><li><a href=#__init__py>__init__.py</a></li><li><a href=#syspath>sys.path</a><ul><li><a href=#临时引用>临时引用</a></li><li><a href=#路径引用问题>路径引用问题</a></li><li><a href=#错误示范>错误示范</a></li></ul></li><li><a href=#syspath-1>sys.path</a></li><li><a href=#if-__name__--__main__>if <strong>name</strong> == &ldquo;<strong>main</strong>&rdquo;</a></li></ul></nav></div></div><div class=content id=content><h2 id=目录结构>目录结构</h2><pre><code>C:\USERS\EVILMASS\DESKTOP\PATH0
+│   server.py
+├───path1
+│   │   func.py
+│   │   __init__.py
+└───path2
+    │   func.py
+    │   __init__.py
+    ├───path2_1
+    │   │   func.py
+    │   │   __init__.py
+    │   ├───path2_1_1
+    │   │   │   func.py
+    │   │   │   special.py
+    │   │   │   __init__.py
+</code></pre><h2 id=__init__py>__init__.py</h2><p>一个 <code>module1.py</code> 文件可以看作一个模块：<code>import module1</code></p><p><code>__init__.py</code> 则是将一个文件夹变为 <code>package</code></p><p>每一次 <code>import</code> 都会执行 <code>__init__.py</code> 内的代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># no __init__.py</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>path2.path2_1.func</span> <span class=kn>import</span> <span class=n>echo</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>path2.path2_1.special</span> <span class=kn>import</span> <span class=n>echo_special</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># has __init__.py</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>.func</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>.special</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>path2.path2_1</span> <span class=kn>import</span> <span class=n>echo</span><span class=p>,</span> <span class=n>echo_special</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=syspath>sys.path</h2><p>实际遇到的绝大部分问题都是<strong>引用路径</strong>和<strong>循环引用</strong>问题，添加临时引用可以解决但请使用</p><p><strong>绝对路径！</strong></p><p><strong>绝对路径！</strong></p><p><strong>绝对路径！</strong></p><h3 id=临时引用>临时引用</h3><p>针对不频繁调用的模块可以在入口处添加临时引用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>os.path</span> <span class=kn>import</span> <span class=n>abspath</span><span class=p>,</span> <span class=n>join</span><span class=p>,</span> <span class=n>dirname</span>
+</span></span><span class=line><span class=cl><span class=c1># 添加临时引用目录</span>
+</span></span><span class=line><span class=cl><span class=n>sys</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>join</span><span class=p>(</span><span class=n>abspath</span><span class=p>(</span><span class=n>dirname</span><span class=p>(</span><span class=vm>__file__</span><span class=p>)),</span> <span class=s2>&#34;path2/path2_1/path2_1_1&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>special</span> <span class=kn>import</span> <span class=n>echo_special</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>echo_special</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>echo_special</span> <span class=n>from</span><span class=p>:</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>Evilmass</span>\<span class=n>Desktop</span>\<span class=n>path0</span>\<span class=n>path2</span>\<span class=n>path2_1</span>\<span class=n>path2_1_1</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=路径引用问题>路径引用问题</h3><p><code>path0\path2\path2_1\path2_1_1\special.py</code> 调用同级 <code>text</code> 文件夹下的 <code>echo</code> 模块</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># path0\path2\path2_1\path2_1_1\__init__.py</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>.func</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># path0\path2\path2_1\path2_1_1\special.py\text\__init__.py</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>.func</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># path0\path2\path2_1\path2_1_1\special.py</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>func</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>func</span> <span class=kn>import</span> <span class=n>echo</span> <span class=k>as</span> <span class=n>local_echo</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>text</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>text.func</span> <span class=kn>import</span> <span class=n>echo</span> <span class=k>as</span> <span class=n>text_echo</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>echo_special</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>func</span><span class=o>.</span><span class=n>echo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>local_echo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>text</span><span class=o>.</span><span class=n>echo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>text_echo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>echo_special</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># path0\server.py 导入 echo_special 会报错，即便有 text.__init__.py</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>path2.path2_1.path2_1_1.special</span> <span class=kn>import</span> <span class=n>echo_special</span>
+</span></span><span class=line><span class=cl><span class=n>echo_special</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Traceback</span> <span class=p>(</span><span class=n>most</span> <span class=n>recent</span> <span class=n>call</span> <span class=n>last</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>  <span class=n>File</span> <span class=s2>&#34;server.py&#34;</span><span class=p>,</span> <span class=n>line</span> <span class=mi>27</span><span class=p>,</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>module</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>path2.path2_1.path2_1_1.special</span> <span class=kn>import</span> <span class=n>echo_special</span>
+</span></span><span class=line><span class=cl>  <span class=n>File</span> <span class=s2>&#34;C:\Users\Evilmass\Desktop\path0\path2\path2_1\path2_1_1\__init__.py&#34;</span><span class=p>,</span> <span class=n>line</span> <span class=mi>2</span><span class=p>,</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>module</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>.special</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>  <span class=n>File</span> <span class=s2>&#34;C:\Users\Evilmass\Desktop\path0\path2\path2_1\path2_1_1\special.py&#34;</span><span class=p>,</span> <span class=n>line</span> <span class=mi>5</span><span class=p>,</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>module</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>from</span> <span class=nn>text.func</span> <span class=kn>import</span> <span class=n>echo</span> <span class=k>as</span> <span class=n>text_echo</span>
+</span></span><span class=line><span class=cl><span class=ne>ModuleNotFoundError</span><span class=p>:</span> <span class=n>No</span> <span class=n>module</span> <span class=n>named</span> <span class=s1>&#39;text&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>但直接在 <code>path2_1_1</code> 目录下执行 <code>python special.py</code> 是正常运行的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>cd</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>Evilmass</span>\<span class=n>Desktop</span>\<span class=n>path0</span>\<span class=n>path2</span>\<span class=n>path2_1</span>\<span class=n>path2_1_1</span>
+</span></span><span class=line><span class=cl><span class=n>python</span> <span class=n>special</span><span class=o>.</span><span class=n>py</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>echo</span> <span class=n>from</span><span class=p>:</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>Evilmass</span>\<span class=n>Desktop</span>\<span class=n>path0</span>\<span class=n>path2</span>\<span class=n>path2_1</span>\<span class=n>path2_1_1</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>echo</span> <span class=n>from</span><span class=p>:</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>Evilmass</span>\<span class=n>Desktop</span>\<span class=n>path0</span>\<span class=n>path2</span>\<span class=n>path2_1</span>\<span class=n>path2_1_1</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>echo</span> <span class=n>from</span><span class=p>:</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>Evilmass</span>\<span class=n>Desktop</span>\<span class=n>path0</span>\<span class=n>path2</span>\<span class=n>path2_1</span>\<span class=n>path2_1_1</span>\<span class=n>text</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>echo</span> <span class=n>from</span><span class=p>:</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>Evilmass</span>\<span class=n>Desktop</span>\<span class=n>path0</span>\<span class=n>path2</span>\<span class=n>path2_1</span>\<span class=n>path2_1_1</span>\<span class=n>text</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=错误示范>错误示范</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 多了一个 `.` 能让 `server.py` 跑起来</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>.text.func</span> <span class=kn>import</span> <span class=n>echo</span> <span class=k>as</span> <span class=n>text_echo</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 但在 path2_1_1 目录下运行则会报错</span>
+</span></span><span class=line><span class=cl><span class=n>cd</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>Evilmass</span>\<span class=n>Desktop</span>\<span class=n>path0</span>\<span class=n>path2</span>\<span class=n>path2_1</span>\<span class=n>path2_1_1</span>
+</span></span><span class=line><span class=cl><span class=n>python</span> <span class=n>special</span><span class=o>.</span><span class=n>py</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Traceback</span> <span class=p>(</span><span class=n>most</span> <span class=n>recent</span> <span class=n>call</span> <span class=n>last</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>   <span class=n>File</span> <span class=s2>&#34;special.py&#34;</span><span class=p>,</span> <span class=n>line</span> <span class=mi>5</span><span class=p>,</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>module</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>     <span class=kn>from</span> <span class=nn>.text.func</span> <span class=kn>import</span> <span class=n>echo</span> <span class=k>as</span> <span class=n>text_echo</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=ne>ImportError</span><span class=p>:</span> <span class=n>attempted</span> <span class=n>relative</span> <span class=kn>import</span> <span class=nn>with</span> <span class=n>no</span> <span class=n>known</span> <span class=n>parent</span> <span class=n>package</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=syspath-1>sys.path</h2><p><strong>绝大部分问题只要检查一下 <code>sys.path</code> 就能解决</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>sys</span><span class=o>.</span><span class=n>path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span><span class=p>[</span><span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>Evilmass</span><span class=se>\\</span><span class=s1>AppData</span><span class=se>\\</span><span class=s1>Local</span><span class=se>\\</span><span class=s1>Programs</span><span class=se>\\</span><span class=s1>Python</span><span class=se>\\</span><span class=s1>Python37</span><span class=se>\\</span><span class=s1>DLLs&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>Evilmass</span><span class=se>\\</span><span class=s1>AppData</span><span class=se>\\</span><span class=s1>Local</span><span class=se>\\</span><span class=s1>Programs</span><span class=se>\\</span><span class=s1>Python</span><span class=se>\\</span><span class=s1>Python37</span><span class=se>\\</span><span class=s1>lib&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>Evilmass</span><span class=se>\\</span><span class=s1>AppData</span><span class=se>\\</span><span class=s1>Local</span><span class=se>\\</span><span class=s1>Programs</span><span class=se>\\</span><span class=s1>Python</span><span class=se>\\</span><span class=s1>Python37&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>Evilmass</span><span class=se>\\</span><span class=s1>AppData</span><span class=se>\\</span><span class=s1>Local</span><span class=se>\\</span><span class=s1>Programs</span><span class=se>\\</span><span class=s1>Python</span><span class=se>\\</span><span class=s1>Python37</span><span class=se>\\</span><span class=s1>lib</span><span class=se>\\</span><span class=s1>site-packages&#39;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>很明显没有 <code>text</code> 目录，那么 <code>server.py</code> 加临时引用试试。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>os.path</span> <span class=kn>import</span> <span class=n>abspath</span><span class=p>,</span> <span class=n>join</span><span class=p>,</span> <span class=n>dirname</span>
+</span></span><span class=line><span class=cl><span class=c1># 添加临时引用目录</span>
+</span></span><span class=line><span class=cl><span class=n>sys</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>join</span><span class=p>(</span><span class=n>abspath</span><span class=p>(</span><span class=n>dirname</span><span class=p>(</span><span class=vm>__file__</span><span class=p>)),</span> <span class=s2>&#34;path2/path2_1/path2_1_1/text&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>path2.path2_1.path2_1_1.special</span> <span class=kn>import</span> <span class=n>echo_special</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>echo_special</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>问题解决。</p><h2 id=if-__name__--__main__>if <strong>name</strong> == &ldquo;<strong>main</strong>&rdquo;</h2><ul><li>如果作为脚本直接运行，会执行 <code>__name__ == "__main__"</code> 下面的内容</li><li>如果是被其他 <code>py</code> 文件作为 <code>package</code> 引用则不执行</li></ul><p>99% 的文章都会这么告诉你，少部分提一下 <code>___name__</code> 作用域，我的建议是：
+<strong>Talk Is Cheap, Show Me Code</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># echo.py</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>echo</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>echo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;after echo, run this&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=s2>&#34;__main__&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=s2>&#34;after echo, run this&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># another.py</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>echo</span> <span class=kn>import</span> <span class=n>echo</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>echo</span><span class=o>.</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=s2>&#34;echo&#34;</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-07-23&nbsp;<a class=git-hash href=https://github.com/sunt-programator/EnjoyIt/commit/23e161205406152a2a9077849679184f8d0f7b6b target=_blank rel="noopener noreferrer" title="commit by Evilmass(21218296+Evilmass@users.noreply.github.com) 23e161205406152a2a9077849679184f8d0f7b6b: rebuild">
+<i class="fas fa-hashtag fa-fw"></i>23e1612</a></span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/posts/python_import/index.md target=_blank rel="noopener noreferrer">Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://evilmass.github.io/posts/python_import/ data-title="python import" data-hashtags=Python><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://evilmass.github.io/posts/python_import/ data-hashtag=Python><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://evilmass.github.io/posts/python_import/ data-title="python import"><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://evilmass.github.io/posts/python_import/ data-title="python import"><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://evilmass.github.io/posts/python_import/ data-title="python import"><i class="fab fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/multithreading/ class=prev rel=prev title="Python 多线程笔记"><i class="fas fa-angle-left fa-fw"></i>Python 多线程笔记</a>
+<a href=/posts/trollinggfw/ class=next rel=next title=当你的朋友需要科学上网的时候>当你的朋友需要科学上网的时候<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=tcomment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://twikoo.js.org/>Twikoo</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><span id=busuanzi_container_site_pv>Site PV: <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span></span>
+<span class=division>•</span>
+<span id=busuanzi_container_site_uv>Site UV: <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span></span></div><div class=footer-line><a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.110.0">Hugo</a> - <a href=https://github.com/xinyu-yang/EnjoyIt target=_blank rel="noopener noreferrer" title="EnjoyIt 0.0.1"><i class="fas fa-heart fa-fw"></i>EnjoyIt</a><span class=division> •</span>
+<i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2023</span>&nbsp;•&nbsp;<span class=license><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw"></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/twikoo@1.6.15/dist/twikoo.all.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{twikoo:{el:"#tcomment",envId:"https://twikoo-uqga.vercel.app/",meta:"zh-CN"}}}</script><script type=text/javascript src=/js/theme.a63aa926c3cd8d6695367caa381f19bdaa78efc1bd87b33c0a4968ca187b5c7f.js integrity="sha256-pjqpJsPNjWaVNnyqOB8Zvap478G9h7M8Ckloyhh7XH8="></script></body></html>
