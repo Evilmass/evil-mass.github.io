@@ -1,0 +1,3 @@
+content/posts/**/pic
+content/posts/**/code
+.hugo_build.lock
