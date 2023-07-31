@@ -40,8 +40,10 @@ docker run -dit \
 **然后如无意外的出意外了。**
 
 ## playwright
-如果快速上手可以看这一篇：[[Task/Playwright 五分钟上手指南/playwright 五分钟上手指南]]
-官方文档很详细，API 设计很好（语法符合操作直觉），下面是通用的签到流程代码。
+如果快速上手可以看这一篇：[[Blog/Playwright 五分钟上手指南/playwright 五分钟上手指南]]
+官方文档很详细，API 设计很好（语法符合操作直觉）。
+
+下面是通用的签到流程代码。
 ```python
 # coding:utf-8
 

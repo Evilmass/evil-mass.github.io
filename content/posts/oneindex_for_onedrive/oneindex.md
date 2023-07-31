@@ -27,13 +27,11 @@ module.exports = {
 
 因为仓库用的是 LocalStorage 的方式，所以 .password 这种方法的不能完全保证安全性，感觉使用 github 的 env 变量这类方法更合适。
 
-作者早期的 [onedrive-cf-index](https://github.com/spencerwooo/onedrive-cf-index) 套用了 cloudflare，理论上在现有仓库手动反代一下效果更好。但挂载流媒体行为会[违反 cf 的 tos](https://hostloc.com/thread-1053006-1-1.html)，所以还是不折腾了。
-
-各路人士薅了这么久 cf 羊毛，cf 还是财大气粗的提供各种优质服务，respct。
-
-最后放效果图
-![](https://s2.loli.net/2023/06/27/hyzdAln4emxB5EL.png)
-
-
 不挂梯子的直链速度还可以，播放视频绰绰有余了
 ![](https://s2.loli.net/2023/06/27/7w1WndxBTkFZgqX.jpg)
+
+作者早期的 [onedrive-cf-index](https://github.com/spencerwooo/onedrive-cf-index) 套用了 cloudflare，挂载流媒体行为会[违反 cf 的 tos](https://hostloc.com/thread-1053006-1-1.html)，所以还是不折腾反代了。
+
+各路人士薅了 CloudFlare 这么久羊毛，CloudFlare 还是财大气粗的提供各种优质服务。
+
+Respct。

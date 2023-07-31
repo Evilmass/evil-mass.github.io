@@ -24,11 +24,7 @@ categories: ["Python"]
         │   │   │   __init__.py
 
 ## \_\_init__.py
-一个 `module1.py` 文件可以看作一个模块：`import module1`
-
-`__init__.py` 则是将一个文件夹变为 `package`
-
-每一次 `import` 都会执行 `__init__.py` 内的代码。
+一个 `module1.py` 文件可以看作一个模块：`import module1`，`__init__.py` 则是将一个文件夹变为 `package`，每一次 `import` 都会执行 `__init__.py` 内的代码。
 ```python
 # no __init__.py
 from path2.path2_1.func import echo
@@ -41,12 +37,9 @@ from path2.path2_1 import echo, echo_special
 ```
 
 ## sys.path
-实际遇到的绝大部分问题都是**引用路径**和**循环引用**问题，添加临时引用可以解决但请使用
-
-**绝对路径！**
-
-**绝对路径！**
-
+实际遇到的绝大部分问题都是**引用路径**和**循环引用**问题，添加临时引用可以解决但请使用：  
+**绝对路径！**  
+**绝对路径！**  
 **绝对路径！**
 
 ### 临时引用
@@ -130,10 +123,10 @@ python special.py
 ```python
 import sys
 print(sys.path)
->>>['C:\\Users\\Evilmass\\AppData\\Local\\Programs\\Python\\Python37\\DLLs',
-    'C:\\Users\\Evilmass\\AppData\\Local\\Programs\\Python\\Python37\\lib',
-    'C:\\Users\\Evilmass\\AppData\\Local\\Programs\\Python\\Python37',
-    'C:\\Users\\Evilmass\\AppData\\Local\\Programs\\Python\\Python37\\lib\\site-packages']
+>>>['C:\\Users\\evimo\\AppData\\Local\\Programs\\Python\\Python37\\DLLs',
+    'C:\\Users\\evimo\\AppData\\Local\\Programs\\Python\\Python37\\lib',
+    'C:\\Users\\evimo\\AppData\\Local\\Programs\\Python\\Python37',
+    'C:\\Users\\evimo\\AppData\\Local\\Programs\\Python\\Python37\\lib\\site-packages']
 ```
 
 很明显没有 `text` 目录，那么 `server.py` 加临时引用试试。
@@ -153,7 +146,7 @@ echo_special()
 - 如果作为脚本直接运行，会执行 `__name__ == "__main__"` 下面的内容
 - 如果是被其他 `py` 文件作为 `package` 引用则不执行
 
-99% 的文章都会这么告诉你，少部分提一下 `___name__` 作用域，我的建议是：
+99% 的文章都会这么告诉你，少部分提一下 `___name__` 作用域，我的建议是：  
 **Talk Is Cheap, Show Me Code**
 ```python
 # echo.py

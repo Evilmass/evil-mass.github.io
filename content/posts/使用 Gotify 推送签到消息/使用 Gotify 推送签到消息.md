@@ -10,15 +10,17 @@ categories: ["工具"]
 目前在 huggingface 部署了多个签到脚本，由于仓库设置成 Private，想看脚本输出就只能在浏览器请求 `log/filename=<filename>&token=<token>` 接口。
 
 及时获取签到通知就成了一个新需求，要求如下：
-> 1. 能自建推送服务器。
->     这部分隐私要求可有可无，单纯是数据在自己手上比较安心。签到日志输出内容： `<datetime.now> <sign_platform> <sign_result>`，没有任何利用价值。
+1. 能自建推送服务器。
+2. 足够简单。
+
+> 日志隐私保护可有可无，单纯是数据在自己手上比较安心。  
+签到日志输出内容： `<datetime.now> <sign_platform> <sign_result>`，没有任何利用价值。
 > 
-> 2. 足够简单。
->    这个则是针对安卓端的需求，安卓推送需要 [FCM](https://firebase.google.com/docs/cloud-messaging)（绑定谷歌三件套）必须在后台一直挂着梯子，所以 App 方案反而是能接受的。
+> 简单则是针对安卓端的需求：安卓推送需要 [FCM](https://firebase.google.com/docs/cloud-messaging)（绑定谷歌三件套）必须在后台一直挂着梯子，所以 App 方案反而是能接受的。
 
-那可选的也就不多了，首先排除：WxPusher、Server酱、TelegramBot、QQBot、邮箱。
-
-那就只剩下 [pushdeer](https://github.com/easychen/pushdeer)、[Bark](https://github.com/Finb/Bark)、[Gotify](https://github.com/gotify/server)。
+那可选的也就不多了。  
+首先排除：WxPusher、Server酱、TelegramBot、QQBot、邮箱。  
+还剩下 [pushdeer](https://github.com/easychen/pushdeer)、[Bark](https://github.com/Finb/Bark)、[Gotify](https://github.com/gotify/server)。
 
 ## pushdeer
 最开始吸引我的是 pushdeer，下载 App 打开后发现 UI 做的还可以。

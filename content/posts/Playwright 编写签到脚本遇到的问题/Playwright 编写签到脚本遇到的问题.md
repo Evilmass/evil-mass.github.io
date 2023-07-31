@@ -32,7 +32,7 @@ await page.wait_for_load_state("networkidle")   # 等待网络加载完成
 is_visible() 在 headless = False 下没有问题，但调试的下切换到其他窗口，is_visible() 就会失去聚焦对象。
 
 ## 多线程
-文档确说明 [**Playwright's API is not thread-safe**](https://playwright.dev/python/docs/library#threading)，[issue/623](https://github.com/microsoft/playwright-python/issues/623)也有人给出多线程的实现，但还是推荐使用 async 完成。
+文档确说明 [**Playwright's API is not thread-safe**](https://playwright.dev/python/docs/library#threading)，[issue/623](https://github.com/microsoft/playwright-python/issues/623) 也有人给出多线程的实现，但还是推荐使用 async 完成。
 
 ## 多进程 
 同上，与其手动处理进程资源（开销），不如直接 async。
@@ -46,11 +46,9 @@ is_visible() 在 headless = False 下没有问题，但调试的下切换到其�
 
 可以理解为在一个任务里面只有一个谷歌浏览器（browser），可以拥有多个谷歌账号（context）， 每个账号（local storage）可以存储所有标签页（page） 的 cookie 信息。  
 
-> Each browser context can host multiple pages (tabs)
-
 也就是说：
 
-> 只有一个 page 对象在遇到耗时任务时一定会持续等待当前任务完成，async/await 无法发挥作用，和串行完成任务没区别。
+> 只有一个 page 对象在遇到耗时任务时一定会持续等待当前任务完成，async/await 无法发挥作用，完成时间和串行完成任务没区别。
 
 也就是说：
 
@@ -185,7 +183,7 @@ if __name__ == "__main__":
 ![](https://s2.loli.net/2023/07/26/hocCpS8ZYHfQaBy.png)
 
 ## 报错：playwright.\_impl.\_api_types.Error: Playwright connection closed
-多半是过度封装创建函数导致的。page 对象一旦跳出 `async with async_playwright() as playwright:` 上下文就无法获取 `browser | context` 远来的属性。
+多半是过度封装创建函数导致的。page 对象一旦跳出 `async with async_playwright() as playwright:` 上下文就无法获取 `browser | context` 原来的属性。
 
 ## 代理
 ```python
@@ -200,7 +198,7 @@ async with async_playwright() as playwright:
 ```
 
 ## v2ex
-点击签到按钮提示：你的浏览器有一些奇奇怪怪的设置，请用一个干净安装的浏览器重试一下吧。
+点击签到按钮提示：“你的浏览器有一些奇奇怪怪的设置，请用一个干净安装的浏览器重试一下吧”。  
 原因：[首页 referer 与其他页不匹配](https://www.v2ex.com/t/846469)。  
 解决办法：得先回首页再跳转到签到页面。  
 ```python
@@ -216,7 +214,7 @@ await goto(sign_url)
 ![](https://s2.loli.net/2023/07/26/hv59PLiaOYNgmWF.png)
 
 ## 鼠标悬停
-[hover](https://playwright.dev/python/docs/api/class-locator#locator-hover)或[focus](https://playwright.dev/python/docs/api/class-locator#locator-focus)。
+[hover](https://playwright.dev/python/docs/api/class-locator#locator-hover) 或 [focus](https://playwright.dev/python/docs/api/class-locator#locator-focus)。
 
 ## 模拟正常输入
 ```python
@@ -234,7 +232,3 @@ print(await page.get_by_text("发个弹幕呗").count())
 await page.get_by_placeholder("发个弹幕呗~").nth(1).fill("2")
 await page.get_by_text("发送", exact=True).nth(1).click():
 ```
-
-
-## 确认
-

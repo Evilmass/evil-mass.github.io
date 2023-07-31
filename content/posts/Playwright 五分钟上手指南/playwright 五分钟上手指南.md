@@ -1,5 +1,5 @@
 ---
-title: playwright 快速上手指南
+title: playwright 五分钟上手指南
 date: 2023-07-23T01:15:31+08:00
 draft: false
 tags: ["playwright"]
@@ -19,10 +19,10 @@ playwright install chromium firefox
 
     playwright codegen -o test.py -b chromium
 
-1. 调试模式会自动记录并生成代码。
+调试模式会自动记录并生成代码。
 ![](https://s2.loli.net/2023/07/23/no5YHAKX16PhWLv.png)
 
-2. 移动到相应位置显示元素定位代码，填入相关验证信息，点击登录。
+移动到相应位置显示元素定位代码，填入相关验证信息，点击登录。
 ![](https://s2.loli.net/2023/07/23/S5vxr72gXHe4Fn1.png)
 
 右边的调试窗口已经自动生成刚才的登录流程代码（同步）了，将操作部分的代码加 `await` 改成异步即可。
@@ -55,15 +55,11 @@ if __name__ == "__main__":
 
 ```
 
-平时只需要 `await page.pause()` 然后在 record 模式下定位元素，开发效率极高。
-
+平时只需要 `await page.pause()` 然后在 record 模式下定位元素，开发效率极高。  
 动画使用 [Screen To Gif](https://www.screentogif.com/) 录制。
 ![login.gif](https://s2.loli.net/2023/07/23/jMiRLtrVAqW4SDY.gif)
 
 ## 练习站点
-https://sahitest.com/demo
-
+https://sahitest.com/demo  
 想掌握 playwright 各种用法，建议用心过一遍。  
 ![](https://s2.loli.net/2023/07/26/ZcpbDdRMNjGCf37.png)
-
-![](https://s2.loli.net/2023/07/26/8qJfGvKcETX4khg.png)

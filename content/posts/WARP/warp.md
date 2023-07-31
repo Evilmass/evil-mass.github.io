@@ -2,23 +2,23 @@
 title: "WARP 作为科学上网备用手段"
 date: "2022-08-11T11:11:20+08:00"
 tags: ["warp", "zerotrust", "wireguard", "clash", "raspberry"]
-categories: ["各种配置"]
+categories: ["配置"]
 ---
 
 ## 梯子爆炸
-前几天经历过一次两个机场同时失效的情况，期间拿 Cloudflare WARP 客户端暂时顶过去。
+前几天经历过一次两个机场同时失效的情况，期间拿 CloudFlare WARP 客户端暂时顶过去。  
 
-**梯子这东西日常使用感受不到好处，一旦所有梯子同时失效只能用灾难来形容。**
+**梯子这东西日常使用感受不到好处，一旦所有梯子同时失效只能用灾难来形容。**  
 
-虽然 Cloudflare 早几年被玩坏了，但是作为一个备用手段绰绰有余。
+虽然 CloudFlare 早几年被玩坏了，但是作为一个备用手段绰绰有余。
 
 ## APP 端 ZeroTrust 验证失败的绕过方法
 在 Issue 区看到 AndroidStudio 抓包获取 Teams ID 的方法，尝试了一遍发现没什么必要：手动配置更快。
 
-但手机端在验证的最后一步提示失败，挂梯子也无法解决。
+但手机端在验证的最后一步提示失败，挂梯子也无法解决。  
 ![验证 ZeroTrust 失败](https://s2.loli.net/2023/01/21/tuR5ybsF3PEUlVh.jpg)
 
-在 Windows 留意到有一个 DOH 网关的字样。虽然 `warp-cli set-gateway` 是制定官方服务器作 DNS 查询，填到手机上却自动激活了 ZeroTrust。
+在 Windows 留意到有一个 DOH 网关的字样。虽然 `warp-cli set-gateway` 是制定官方服务器作 DNS 查询，填到手机上却自动激活了 ZeroTrust。  
 ![dns-gatewary](https://s2.loli.net/2023/01/21/9Swy6TjzQ1PiAMH.png)
 
 ![填写子域](https://s2.loli.net/2023/01/21/GnOL1PICqo8hADs.png)
@@ -26,10 +26,9 @@ categories: ["各种配置"]
 ![开启ZeroTrust成功](https://s2.loli.net/2023/01/21/GeFWK3NdLIHszoT.jpg)
 
 ## WRAP
-配置 ZeroTrust 的教程一搜就有：[滥用 Cloudflare ZeroTrust WARP 科学上网](https://y4er.com/posts/cloudflare-zerotrust-proxy)。
+配置 ZeroTrust 的教程一搜就有：[滥用 Cloudflare ZeroTrust WARP 科学上网](https://y4er.com/posts/cloudflare-zerotrust-proxy)。  
 
-安装好 Cloudflare Windows Desktop Client 后开启本地代理，往 Clash 添加一个 Socks5 服务器即可。
-
+安装好 Cloudflare Windows Desktop Client 后开启本地代理，往 Clash 添加一个 Socks5 服务器即可。  
 ![warp 设置本地代理1](https://s2.loli.net/2023/01/21/qHZ8YnXlgbWGMSK.png)
 
 ![warp 设置本地代理2](https://s2.loli.net/2023/01/21/aIxeQyOJMZHp2bS.png)
@@ -44,6 +43,8 @@ redir-port: 7892
 
 # 允许局域网的连接
 allow-lan: true
+authencation:
+  -"<user>:<password>"
 
 # 规则模式：Rule（规则） / Global（全局代理）/ Direct（全局直连）
 mode: rule
@@ -52,7 +53,7 @@ mode: rule
 # 5 个级别：silent / info / warning / error / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。
 log-level: info
 # Clash 的 RESTful API
-external-controller: '0.0.0.0:9090'
+external-controller: '127.0.0.1:9090'
 
 # RESTful API 的口令
 secret: ''
@@ -60,7 +61,7 @@ secret: ''
 dns:
   enable: true
   ipv6: true
-  listen: '0.0.0.0:53'
+  listen: '127.0.0.1:53'
   use-hosts: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -182,18 +183,13 @@ rules:
 2. WARP Client 会根据最近的地理位置选择连接机房（SJC），有些机房（HKG）虽然能连上但是不稳定，甚至完全连不上。
 3. WARP Linux Client 不支持 ARM 平台，树莓派要走 Wireguard。
 
-
 ![不支持 ARM 平台](https://s2.loli.net/2023/01/21/jDxpLyol6iJfKzw.png)
 
 ### 复制 23PB 流量 bug
-<!-- 刷流量推荐用这个：[warpplus](https://github.com/Oreomeow/warpplus)
-![warpplus-telegram-bot](https://s2.loli.net/2023/01/21/PtA9TJbpf5EvhkI.png) -->
-
-什么年代了还在传统[刷推荐流量](https://github.com/Oreomeow/warpplus)，直接 [generatewarpplusbot](t.me/generatewarpplusbot) 生成一个用不完的 key，或者用以下复制 bug。
-
-    备份自己的 key
-    到 t.me/warpplus 拷贝一个 23PB 的 key
-    手机更换密钥后可用流量变成 23PB，再切换回自己的 key 会发现 23PB 流量已复制到自己账号下
+什么年代了还在传统[刷推荐流量](https://github.com/Oreomeow/warpplus)，直接 [generatewarpplusbot](t.me/generatewarpplusbot) 生成一个用不完的 key，或者用以下复制 bug：
+1. 备份自己的 key
+2. 到 t.me/warpplus 拷贝一个 23PB 的 key
+3. 手机更换密钥后可用流量变成 23PB，再切换回自己的 key 会发现 23PB 流量已复制到自己账号下
 
 ![](https://s2.loli.net/2023/05/24/ewf1AKzPtVp3gkO.png)
 
@@ -225,10 +221,9 @@ endgate.cloudflareclient.com:2408
 ### wireproxy
 顺着 [fscarmen/warp](https://github.com/fscarmen/warp) 找到 [wgcf](https://github.com/ViRb3/wgcf/)，导出配置文件后修改 Endpoint 即可用 Wireguard 连上 WARP。
 
-早期还有批处理改系统路由表分流后利用 Wireguard 科学上网的玩法，后面应对 UDP Qos 还套 fake-tcp，都太 Tricky 了。
+早期还有批处理改系统路由表分流后利用 Wireguard 科学上网的玩法，后面应对 UDP Qos 还套 fake-tcp，都太 tricky 了。
 
 直接替换相应 Endpoint。
-
 ```conf
 [Interface]
 PrivateKey =
@@ -282,12 +277,10 @@ start /min wireproxy.exe -c wireproxy.conf
 ## 全自动优选 Endpoint
 不考虑速度，只测试连通性后根据最低延迟优选 Endpoing，半小时跑一遍脚本
 
-
       * */30 * * * /usr/bin/python /home/pi/best_endpiont.py
 
 
 脚本看注释就能懂，工作普遍用第三方库（方便好用）导致写脚本的习惯不太好，以后尽量改成标准库。
-
 ```python
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
@@ -418,6 +411,5 @@ if __name__ == "__main__":
     rewrite_restart(best_endpoint)
 
 ```
-
 
 至此，一个能用的科学上网备用手段就完全配置好了。
