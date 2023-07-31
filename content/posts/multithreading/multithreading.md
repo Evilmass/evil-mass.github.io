@@ -1,6 +1,6 @@
 ---
 title: "Python 多线程笔记"
-date: 2023-02-11T01:17:31+08:00
+date: 2021-02-11T01:17:31+08:00
 tags: ["Python", "多线程", "multitreading"]
 categories: ["Python"]
 ---

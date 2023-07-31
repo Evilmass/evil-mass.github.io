@@ -1,6 +1,6 @@
 ---
 title: "WARP 作为科学上网备用手段"
-date: "2022-08-11"
+date: "2022-08-11T11:11:20+08:00"
 tags: ["warp", "zerotrust", "wireguard", "clash", "raspberry"]
 categories: ["各种配置"]
 ---
