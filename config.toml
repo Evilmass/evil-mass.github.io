@@ -81,13 +81,13 @@ ignoreErrors = ["error-remote-getjson"]
 
     [languages.zh-cn.params]
       # 网站描述
-      description = "关于 EnjoyIt 主题"
+      description = ""
       # 网站关键词
       keywords = ["Theme", "Hugo"]
       # 应用图标配置
       [languages.zh-cn.params.app]
         # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
-        title = "EnjoyIt"
+        title = ""
         # 是否隐藏网站图标资源链接
         noFavicon = false
         # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
@@ -122,7 +122,7 @@ ignoreErrors = ["error-remote-getjson"]
       # 主页信息设置
       [languages.zh-cn.params.home]
         # RSS 文章数目
-        rss = 10
+        rss = 6
         # 主页个人信息
         [languages.zh-cn.params.home.profile]
           enable = true
@@ -220,7 +220,7 @@ ignoreErrors = ["error-remote-getjson"]
   # site default theme ("light", "dark", "auto")
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
-  gitRepo = "https://github.com/sunt-programator/EnjoyIt"
+  gitRepo = ""
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
   fingerprint = "sha256"
   # date format
@@ -239,7 +239,7 @@ ignoreErrors = ["error-remote-getjson"]
       # URL of the LOGO
       logo = ""
       # title name
-      name = "EnjoyIt"
+      name = ""
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = "<i class='fas fa-heart fa-fw'></i>"
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -349,7 +349,7 @@ ignoreErrors = ["error-remote-getjson"]
       fullscreen = true
     # Social share links in post page
     [params.page.share]
-      enable = true
+      enable = false
       Twitter = true
       Facebook = true
       Linkedin = false
@@ -480,9 +480,9 @@ ignoreErrors = ["error-remote-getjson"]
 
   # Analytics config
   [params.analytics]
-    enable = false
+    enable = true
     [params.analytics.google]
-      id = ""
+      id = "G-YCDTQDYHT3"
       # whether to anonymize IP
       anonymizeIP = true
 
@@ -561,7 +561,7 @@ ignoreErrors = ["error-remote-getjson"]
 
 # Author config
 [author]
-  name = "EnjoyIt"
+  name = "evimo"
   email = ""
   link = ""
 
