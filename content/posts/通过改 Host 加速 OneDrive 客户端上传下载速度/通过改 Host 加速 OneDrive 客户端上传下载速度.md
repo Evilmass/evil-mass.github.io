@@ -84,15 +84,21 @@ rules:
 如果直连速度理想那么到这就结束了。但是很遗憾，不改 host 的情况下只有 100~300k 的速度甚至连不上。  
 ![](https://s2.loli.net/2023/08/03/5Ji1Bv2lZoTUuAn.png)
 
-[UsbEAm Hosts Editor](https://www.dogfight360.com/blog/475/) 就没啥好说的了，直接改 host 看看效果。
+使用 [UsbEAm Hosts Editor](https://www.dogfight360.com/blog/475/)获取延迟低的 host。
 ![](https://s2.loli.net/2023/08/03/V3psOt9N26zYo7l.png)
 
 ![](https://s2.loli.net/2023/08/03/mDeho6Z8JTB7CXt.png)
 
-再加一行在使用的域名。
-![](https://s2.loli.net/2023/08/03/GaeS3Z1FXwtDT7r.png)
+---2023-08-03 12:12:32 UPDATE ---
+根据 [issue/208](https://github.com/Dreamacro/clash/issues/208)，clash 启用 dns 模块会绕过系统 host，所以要直接加在配置下：
+```yaml
+hosts:
+  'bn1301.storage.live.com': 204.79.197.233
+  'dsm01pap005.storage.live.com': 204.79.197.233
+  'dsm01pap007.storage.live.com': 204.79.197.233
+```
 
-效果拔群，惊了。
+效果拔群。
 ![](https://s2.loli.net/2023/08/03/Rs91M85FUvd4qhQ.png)
 
 ![](https://s2.loli.net/2023/08/03/zbfYBOtDAvEVXFM.png)
