@@ -6,6 +6,9 @@ tags: ["onedrive", "host", "UsbEAm Hosts Editor"]
 categories: ["onedrive"]
 ---
 
+我是真的没想到在 3202 年这种方法居然有效。
+
+
 OneDrive 在绝大部分地区只要能登陆上（登录域名被墙）还是能同步的，同步速度根据当地情况而定。
 
 ## 直连配置

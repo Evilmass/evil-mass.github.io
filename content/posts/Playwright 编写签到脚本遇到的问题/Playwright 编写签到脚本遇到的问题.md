@@ -31,6 +31,66 @@ await page.wait_for_load_state("networkidle")   # 等待网络加载完成
 要等待某个元素出现选 is_enabled() | focus() 优于 is_visible()。  
 is_visible() 在 headless = False 下没有问题，但调试的下切换到其他窗口，is_visible() 就会失去聚焦对象。
 
+## playwright.\_impl.\_api_types.Error: Playwright connection closed
+多半是过度封装创建函数导致的。page 对象一旦跳出 `async with async_playwright() as playwright:` 上下文就无法获取 `browser | context` 原来的属性。
+
+## 代理
+```python
+async with async_playwright() as playwright:
+    # 对整个 browser 设置代理
+    browser = await playwright.firefox.launch(headless=browser_headless, proxy=browser_proxy)
+    context = await browser.new_context()
+    
+    # 对不同 context 设置代理
+    browser = await playwright.firefox.launch(headless=False)
+    context = await browser.new_context(proxy=browser_proxy)
+```
+
+## v2ex
+点击签到按钮提示：“你的浏览器有一些奇奇怪怪的设置，请用一个干净安装的浏览器重试一下吧”。  
+原因：[首页 referer 与其他页不匹配](https://www.v2ex.com/t/846469)。  
+解决办法：得先回首页再跳转到签到页面。  
+```python
+await goto(home_url)
+await goto(sign_url)
+```
+
+## b站直播间
+使用 chromium 提示浏览器版本过低，firefox 则没问题。  
+![](https://s2.loli.net/2023/07/26/BSTfLRrAn6FUuPY.png)
+
+同时提示：Cannot read properites of null (reading 'sendDanmaku')  
+![](https://s2.loli.net/2023/07/26/hv59PLiaOYNgmWF.png)
+
+## 鼠标悬停
+[hover](https://playwright.dev/python/docs/api/class-locator#locator-hover) 或 [focus](https://playwright.dev/python/docs/api/class-locator#locator-focus)。
+
+## 模拟正常输入
+```python
+type('123', delay=1000)  # 每个字的输入间隔为一秒
+```
+
+## 多个匹配元素报错
+
+    strict mode violation: get_by_placeholder("发个弹幕呗~") resolved to 2 elements
+
+直接 `await page.pause()` 开启调试模式找出是第几顺位的元素，根据情况使用：`first、last、nth()`。
+```python
+# exact=True 精准匹配
+print(await page.get_by_text("发个弹幕呗").count())
+await page.get_by_placeholder("发个弹幕呗~").nth(1).fill("2")
+await page.get_by_text("发送", exact=True).nth(1).click():
+```
+
+## docker 容器的定位超时问题
+原理不明，本地测试通过而 huggingface 运行第一种写法的代码会超时。
+```python
+# ×
+if await page.get_by_text("你无任何进行任务", exact=True).is_enabled()
+#√
+if page.get_by_text("你无任何进行任务", exact=True) 
+```
+
 ## 多线程
 文档确说明 [**Playwright's API is not thread-safe**](https://playwright.dev/python/docs/library#threading)，[issue/623](https://github.com/microsoft/playwright-python/issues/623) 也有人给出多线程的实现，但还是推荐使用 async 完成。
 
@@ -49,13 +109,9 @@ is_visible() 在 headless = False 下没有问题，但调试的下切换到其�
 也就是说：
 
 > 只有一个 page 对象在遇到耗时任务时一定会持续等待当前任务完成，async/await 无法发挥作用，完成时间和串行完成任务没区别。
-
-也就是说：
-
+> 
 > 一个 context 下启动多个 page 也是近乎串行完成任务。而且启动多个 page 会占用资源，其他 page 一直在等上一个 page 完成任务才能开始工作。
-
-也就是说：
-
+> 
 > 真正意义上的异步同时完成任务就得分别创建多个 browser 对象。 
 
 可以简单测试单个 page 和 多个 page 的区别。先启动一个 fastapi 服务器，设置两个耗时任务。  
@@ -182,53 +238,3 @@ if __name__ == "__main__":
 因为创建了两个浏览器对象，耗时多了一秒。  
 ![](https://s2.loli.net/2023/07/26/hocCpS8ZYHfQaBy.png)
 
-## 报错：playwright.\_impl.\_api_types.Error: Playwright connection closed
-多半是过度封装创建函数导致的。page 对象一旦跳出 `async with async_playwright() as playwright:` 上下文就无法获取 `browser | context` 原来的属性。
-
-## 代理
-```python
-async with async_playwright() as playwright:
-    # 对整个 browser 设置代理
-    browser = await playwright.firefox.launch(headless=browser_headless, proxy=browser_proxy)
-    context = await browser.new_context()
-    
-    # 对不同 context 设置代理
-    browser = await playwright.firefox.launch(headless=False)
-    context = await browser.new_context(proxy=browser_proxy)
-```
-
-## v2ex
-点击签到按钮提示：“你的浏览器有一些奇奇怪怪的设置，请用一个干净安装的浏览器重试一下吧”。  
-原因：[首页 referer 与其他页不匹配](https://www.v2ex.com/t/846469)。  
-解决办法：得先回首页再跳转到签到页面。  
-```python
-await goto(home_url)
-await goto(sign_url)
-```
-
-## b站直播间
-使用 chromium 提示浏览器版本过低，firefox 则没问题。  
-![](https://s2.loli.net/2023/07/26/BSTfLRrAn6FUuPY.png)
-
-同时提示：Cannot read properites of null (reading 'sendDanmaku')  
-![](https://s2.loli.net/2023/07/26/hv59PLiaOYNgmWF.png)
-
-## 鼠标悬停
-[hover](https://playwright.dev/python/docs/api/class-locator#locator-hover) 或 [focus](https://playwright.dev/python/docs/api/class-locator#locator-focus)。
-
-## 模拟正常输入
-```python
-type('123', delay=1000)  # 每个字的输入间隔为一秒
-```
-
-## 多个匹配元素报错
-
-    strict mode violation: get_by_placeholder("发个弹幕呗~") resolved to 2 elements
-
-直接 `await page.pause()` 开启调试模式找出是第几顺位的元素，根据情况使用：`first、last、nth()`。
-```python
-# exact=True 精准匹配
-print(await page.get_by_text("发个弹幕呗").count())
-await page.get_by_placeholder("发个弹幕呗~").nth(1).fill("2")
-await page.get_by_text("发送", exact=True).nth(1).click():
-```

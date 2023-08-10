@@ -25,7 +25,7 @@ categories: ["工具"]
 ## pushdeer
 最开始吸引我的是 pushdeer，下载 App 打开后发现 UI 做的还可以。
 
-But
+But  
 ![](https://img.evimo.top/需要微信登录.jpg)
 
 emmm，登录进去发现安卓端还没有开发好自建服务器的功能，推送信息下面还带广告，直接弃用。
@@ -167,7 +167,7 @@ def push_msg(title: str = "无标题", message: str = "无内容", img_url: str 
 ### 客户端
 2.7.0 版本加入了自动重连的功能，原因是安卓系统默认针对在后台运行的 App 执行**电池优化**，所以还是建议手动加到白名单。即便如此 Gotify 实际使用下来一天也只耗 2% 的电，几乎忽略不计。
 
-**已经多久没见过只有 5m 的 App 了。**  
+**已经多久没见过只有 5MB 的 App 了。**  
 ![](https://img.evimo.top/客户端大小只有5m，点个赞.png)
 
 
